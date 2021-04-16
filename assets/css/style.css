@@ -1,5 +1,4 @@
 /* Variables */
-
 :root {
     /* Colors */
     --dark-red: #8C0F31;
@@ -8,5 +7,132 @@
     --blue: #0597F2;
     --light-blue: #05AFF2;
 }
-
 /* END Variables */
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    background-color: var(--light-blue);
+    /* Adds animation to our background, circling through our theme colors */
+    /* animation-name: backgroundColorPalette;
+	animation-duration: 5s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-timing-function: linear;  */
+}
+
+/* Adds animation to our background, circling through our theme colors */
+/* @keyframes backgroundColorPalette {
+	0% {
+		background: var(--dark-blue);
+	}
+	25% {
+		background: var(--dark-red);
+	}
+	50% {
+		background: var(--blue);
+	}
+	75% {
+		background: var(--light-red);
+	}
+	100% {
+		background: var(--light-blue);
+	}
+} */
+.gamer-art img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 0;
+}
+
+.gamer-art {
+    animation: pulse 3s infinite;
+    margin: 0 auto;
+    display: table;
+    margin-top: 50px;
+    animation-direction: alternate;
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+}
+
+/* Beginning of animations for gamer-art */
+@keyframes cycle-colors {
+    0% { border-color: var(--dark-red)(0, 100%, 50%); }
+    25% { border-color: var(--dark-blue)(90, 100%, 50%); }
+    50% { border-color: var(--light-blue)(180, 100%, 50%); }
+    75% { border-color: var(--light-red)(270, 100%, 50%); }
+    100% { border-color: var(--blue)(360, 100%, 50%); }
+}
+  
+@keyframes pulse {
+    to {
+      opacity: 0.2;
+      transform: scale(1.2);
+    }
+}
+  
+.gamer-art::before,
+.gamer-art::after {
+    animation: pulse 2s linear infinite;
+    border: var(--dark-red) solid 8px;
+    border-radius: 9999px;
+    box-sizing: border-box;
+    content: ' ';
+    height: 140%;
+    left: -20%;
+    opacity: .6;
+    position: absolute;
+    top: -20%;
+    transform: scale(0.714);
+    width: 140%;
+    z-index: 1;
+}
+  
+.gamer-art::after {
+    animation-delay: 1s;
+}
+  
+.gamer-art:hover::before,
+.gamer-art:hover::after {
+    animation: pulse 0.5s linear infinite, cycle-colors 6s linear infinite;
+}
+/* End of animations for gamer-art*/
+
+  
+.site-title, .mission {
+    color: var(--dark-red);
+    text-align: center;
+}
+
+form {
+    text-align: center;
+}
+
+form.search-bar input[type=text] {
+    width: 60%;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: white;
+    background-image: url('//assets/images/gamepad.png'); /* Trying to put a icon into the search bar */
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+}
+
+/* Sticky footer to be used for later! */
+
+/* .footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color:var(--blue);
+    color: white;
+    text-align: center;
+}
+
+.footer div {
+    color: black;
+} */
