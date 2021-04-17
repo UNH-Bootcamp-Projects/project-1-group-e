@@ -17,59 +17,45 @@
 </head>
 
 <body>
+    <section class="side-nav-bar">
+        <ul id="slide-out" class="sidenav">
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                        <div class="tenor-gif-embed" data-postid="3535566" data-share-method="host" data-width="100%" data-aspect-ratio="1.775"><a href="https://tenor.com/view/sound-wave-wave-sound-gif-3535566">Yas GIF</a> from <a href="https://tenor.com/search/soundwave-gifs">Soundwave GIFs</a></div><script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+                    </div>
+                    <a href="#user"><img class="circle" src="./assets/images/Gamer-Clipart.png"></a>
+                    <a href="#name"><span class="white-text name">GamePulse</span></a>
+                </div>
+            </li>
+            <li><a class="waves-effect" href="#!"><i class="material-icons history-icon">history</i>Go Back to Last Pairing</a></li>
+            <li><div class="divider"></div></li>
+            <li><a class="subheader">Recently Saved Pairings:</a></li>
+            <li><a class="waves-effect" href="#!">-- Empty --</a></li>
+            <li><a class="waves-effect" href="#!">-- Empty --</a></li>
+            <li><a class="waves-effect" href="#!">-- Empty --</a></li>
+        </ul>
+        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons save-icon">save</i></a>
+    </section>
 
     <!--Homepage Search Section-->
-<section class="">
-    <div class="gamer-art">
-    <img src="./assets/images/Gamer-Clipart.png">
-    </div>  
-    <h2 class="site-title">GamePulse</h2>
-
-    <p class="mission">Play Video Games. Discover New Music. Jam Out.</p>
-    <form class="search-bar js-search-form" action="">
-      <input class="text-input" type="search" placeholder="Type in a Video Game..." name="search">
-    </form>
-</section>
-
-    <section class="side-nav-bar">
-    <ul id="slide-out" class="sidenav">
-      <li><div class="user-view">
-        <div class="background">
-          <div class="tenor-gif-embed" data-postid="3535566" data-share-method="host" data-width="100%" data-aspect-ratio="1.775"><a href="https://tenor.com/view/sound-wave-wave-sound-gif-3535566">Yas GIF</a> from <a href="https://tenor.com/search/soundwave-gifs">Soundwave GIFs</a></div><script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-        </div>
-        <a href="#user"><img class="circle" src="./assets/images/Gamer-Clipart.png"></a>
-        <a href="#name"><span class="white-text name">GamePulse</span></a>
-      </div></li>
-      <li><a class="waves-effect" href="#!"><i class="material-icons history-icon">history</i>Go Back to Last Pairing</a></li>
-      <li><div class="divider"></div></li>
-      <li><a class="subheader">Recently Saved Pairings:</a></li>
-      <li><a class="waves-effect" href="#!">-- Empty --</a></li>
-      <li><a class="waves-effect" href="#!">-- Empty --</a></li>
-      <li><a class="waves-effect" href="#!">-- Empty --</a></li>
-        
-    </ul>
-    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons save-icon">save</i></a>
-</section>
-    
     <section class="home-page">
         <div class="gamer-art">
             <img src="./assets/images/Gamer-Clipart.png" alt="gamer-clipart">
-        </div>  
+        </div>
 
         <h2 class="site-title">GamePulse</h2>
-
         <p class="mission">Play Video Games. Discover New Music. Jam Out.</p>
 
-        <form class="search-bar" action="">
-            <input type="text" placeholder="Type in a Video Game..." name="search">
+        <form class="search-bar js-search-form" action="">
+            <input class="text-input" type="search" placeholder="Type in a Video Game..." name="search">
         </form>
     </section>
-      
+
+    <!-- Games Search Results Section -->
     <section class="game-page hide">
         <h3 class="page-title">Game Pulse</h3>
-
         <p class="mission">Pick a Game</p>
-
 
         <ul class="game-list">
             <li class="game-list-item">
@@ -115,59 +101,66 @@
         </ul>
     </section>
 
-<!--Results Page Section-->
-<section class="results-page-container hide">
-    <!--Left Videogame Result Section-->
-    <div class="videogame-container">
-        <h2 class="result-title">Video Game
-        </h2>
-        <div class="game-card">
-            <div class="game-image">
-            </div>
-            <ul>
-                <li class="game-data game-name">Game Name</li>
-                <li class="game-data game-rating">9.5 Rating</li>
-                <li class="game-data release-date">Release Date</li>
-                <li class="game-data game-genre">Genre</li>
-                <li class="game-data platform-icon">Platform Icon</li>
-            </ul>
-        </div>
-        <p class="shuffle-text">Shuffle</p>
-        <i class="material-icons small">shuffle</i>
-    </div>
-    <!--Middle Section & Save Button-->
-    <div class="middle-container">
-        <h1 class="perfect-pair">The Perfect Pair</h1>
-        <h2 class="game-song">Videogame Name & Playlist Name</h2>
-        <button class="save-btn">Save</button>
-    </div>
-    <!--Right Spotify Result Section-->
-    <div class="playlist-container">
-        <h2 class="result-title">Playlist</h2>
-        <div class="playlist-data">
-            <ul class="playlist-result-list">
-                <li class="playlist-title playlist-data">Playlist Title & Genre</li>
-                <div class="playlist-songs">
-                    <ul>
-                        <li class="playlist-song">Example Song (Featuring Example Artist)</li>
-                        <hr>
-                        <li class="playlist-song">Example Song by Example Artist</li>
-                        <hr>
-                        <li class="playlist-song">Example Song</li>
-                        <hr>
-                        <li class="playlist-song">Example Song</li>
-                        <hr>
-                        <li class="playlist-song">Example Song</li>
-                        <hr>
-                        <li class="playlist-song">Example Song</li>
-                    </ul>
+    <!--Results Page Section-->
+    <section class="results-page-container hide">
+        <!--Left Videogame Result Section-->
+        <div class="videogame-container">
+            <h2 class="result-title">Video Game
+            </h2>
+            <div class="game-card">
+                <div class="game-image">
                 </div>
-            </ul>
+                <ul>
+                    <li class="game-data game-name">Game Name</li>
+                    <li class="game-data game-rating">9.5 Rating</li>
+                    <li class="game-data release-date">Release Date</li>
+                    <li class="game-data game-genre">Genre</li>
+                    <li class="game-data platform-icon">Platform Icon</li>
+                </ul>
+            </div>
+            <p class="shuffle-text">Shuffle</p>
+            <i class="material-icons small">shuffle</i>
         </div>
-        <p class="shuffle-text">Shuffle</p>
-        <i class="material-icons small">shuffle</i>
-    </div>
-</section>
+        <!--Middle Section & Save Button-->
+        <div class="middle-container">
+            <h1 class="perfect-pair">The Perfect Pair</h1>
+            <h2 class="game-song">Videogame Name & Playlist Name</h2>
+            <button class="save-btn">Save</button>
+        </div>
+        <!--Right Spotify Result Section-->
+        <div class="playlist-container">
+            <h2 class="result-title">Playlist</h2>
+            <div class="playlist-data">
+                <ul class="playlist-result-list">
+                    <li class="playlist-title playlist-data">Playlist Title & Genre</li>
+                    <div class="playlist-songs">
+                        <ul>
+                            <li class="playlist-song">Example Song (Featuring Example Artist)</li>
+                            <hr>
+                            <li class="playlist-song">Example Song by Example Artist</li>
+                            <hr>
+                            <li class="playlist-song">Example Song</li>
+                            <hr>
+                            <li class="playlist-song">Example Song</li>
+                            <hr>
+                            <li class="playlist-song">Example Song</li>
+                            <hr>
+                            <li class="playlist-song">Example Song</li>
+                        </ul>
+                    </div>
+                </ul>
+            </div>
+            <p class="shuffle-text">Shuffle</p>
+            <i class="material-icons small">shuffle</i>
+        </div>
+    </section>
+
+    <!-- <div class="footer">
+        <p>Created By: | &#169; 2021 </p>
+      
+    <div>Icons made by <a href="" title="monkik">monkik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+    </div> -->
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -175,12 +168,5 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- Custom -->
     <script src="./assets/js/script.js"></script>
-
-    <!-- <div class="footer">
-        <p>Created By: | &#169; 2021 </p>
-      
-    <div>Icons made by <a href="" title="monkik">monkik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-    </div> -->
 </body>
-
 </html>
