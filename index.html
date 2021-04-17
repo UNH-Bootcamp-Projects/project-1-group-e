@@ -18,6 +18,19 @@
 
 <body>
 
+    <!--Homepage Search Section-->
+<section class="">
+    <div class="gamer-art">
+    <img src="./assets/images/Gamer-Clipart.png">
+    </div>  
+    <h2 class="site-title">GamePulse</h2>
+
+    <p class="mission">Play Video Games. Discover New Music. Jam Out.</p>
+    <form class="search-bar" action="">
+      <input type="text" placeholder="Type in a Video Game..." name="search">
+    </form>
+</section>
+
     <section class="side-nav-bar">
     <ul id="slide-out" class="sidenav">
       <li><div class="user-view">
@@ -102,6 +115,59 @@
         </ul>
     </section>
 
+<!--Results Page Section-->
+<section class="results-page-container hide">
+    <!--Left Videogame Result Section-->
+    <div class="videogame-container">
+        <h2 class="result-title">Video Game
+        </h2>
+        <div class="game-card">
+            <div class="game-image">
+            </div>
+            <ul>
+                <li class="game-data game-name">Game Name</li>
+                <li class="game-data game-rating">9.5 Rating</li>
+                <li class="game-data release-date">Release Date</li>
+                <li class="game-data game-genre">Genre</li>
+                <li class="game-data platform-icon">Platform Icon</li>
+            </ul>
+        </div>
+        <p class="shuffle-text">Shuffle</p>
+        <i class="material-icons small">shuffle</i>
+    </div>
+    <!--Middle Section & Save Button-->
+    <div class="middle-container">
+        <h1 class="perfect-pair">The Perfect Pair</h1>
+        <h2 class="game-song">Videogame Name & Playlist Name</h2>
+        <button class="save-btn">Save</button>
+    </div>
+    <!--Right Spotify Result Section-->
+    <div class="playlist-container">
+        <h2 class="result-title">Playlist</h2>
+        <div class="playlist-data">
+            <ul class="playlist-result-list">
+                <li class="playlist-title playlist-data">Playlist Title & Genre</li>
+                <div class="playlist-songs">
+                    <ul>
+                        <li class="playlist-song">Example Song (Featuring Example Artist)</li>
+                        <hr>
+                        <li class="playlist-song">Example Song by Example Artist</li>
+                        <hr>
+                        <li class="playlist-song">Example Song</li>
+                        <hr>
+                        <li class="playlist-song">Example Song</li>
+                        <hr>
+                        <li class="playlist-song">Example Song</li>
+                        <hr>
+                        <li class="playlist-song">Example Song</li>
+                    </ul>
+                </div>
+            </ul>
+        </div>
+        <p class="shuffle-text">Shuffle</p>
+        <i class="material-icons small">shuffle</i>
+    </div>
+</section>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
