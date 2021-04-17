@@ -108,7 +108,7 @@ form {
     text-align: center;
 }
 
-form.search-bar input[type=text] {
+form.search-bar .text-input {
     width: 60%;
     box-sizing: border-box;
     border: 2px solid #ccc;
