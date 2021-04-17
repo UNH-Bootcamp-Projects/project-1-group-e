@@ -145,3 +145,35 @@ form.search-bar input[type=text] {
 .footer div {
     color: black;
 } */
+.page-title{
+    color: var(--dark-red);
+    text-align: center;
+}
+.game-list{
+    display: flex;
+    flex-direction: row ;
+    flex-wrap: wrap;
+    list-style: none;
+    flex: 1 0 20%;
+    margin: 5px;
+    height: 100px;
+}
+
+.game-list-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0px 5px 10px;
+}
+
+.game-img{
+    width: 80px;
+    height: 80px;
+    background-color: ivory;
+    border-radius: 20px;
+}
+
+a:hover{
+    color: lightcoral;
+}
