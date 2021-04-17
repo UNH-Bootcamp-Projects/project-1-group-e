@@ -121,12 +121,15 @@ form.search-bar input[type=text] {
     padding: 12px 20px 12px 40px;
 }
 
-.material-icons {
-    font-size: 50px;
+.save-icon {
+    font-size: 70px;
     color: var(--dark-red);
     padding: 20px;
 }
 
+.history-icon {
+    color: var(--dark-red);
+}
 /* Sticky footer to be used for later! */
 
 /* .footer {
