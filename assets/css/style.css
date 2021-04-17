@@ -121,6 +121,15 @@ form.search-bar .text-input {
     padding: 12px 20px 12px 40px;
 }
 
+.save-icon {
+    font-size: 70px;
+    color: var(--dark-red);
+    padding: 20px;
+}
+
+.history-icon {
+    color: var(--dark-red);
+}
 /* Sticky footer to be used for later! */
 
 /* .footer {
@@ -136,3 +145,189 @@ form.search-bar .text-input {
 .footer div {
     color: black;
 } */
+
+/* ~~~~~ RESULTS PAGE STYLING ~~~~~ */
+
+.results-page-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 15em;
+}
+
+.results-page-container i {
+    color: white;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+.results-page-container i:hover {
+    color: var(--dark-blue);
+}
+
+
+.result-title {
+    font-size: 2em;
+    text-align: center;
+    color: white;
+}
+
+.perfect-pair {
+    font-size: 2em;
+    text-align: center;
+    margin: .2em;
+    color: white;
+}
+
+.game-song {
+    font-size: 1em;
+    margin: .8em;
+    color: white;
+}
+
+.shuffle-text {
+    text-align: center;
+    color: white;
+}
+
+/* VIDEOGAME RESULT SECTION */
+
+.videogame-container {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.game-card {
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4em 6em 4em 6em;
+    border-radius: 1em;
+}
+
+.game-card ul {
+    line-height: 1.7em;
+    margin: 0em;
+    text-align: center;
+    color: #0597F2;
+}
+
+.game-image {
+    width: 9em;
+    height: 12em;
+    background-color: grey;
+    margin-bottom: 2em;
+}
+
+/* MIDDLE SECTION WITH MSG & SAVE BUTTON */
+
+.middle-container{
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.save-btn {
+    width: 30%;
+    padding: .4em 1em .4em 1em;
+    background-color: (var(--light-red));
+    border-color: white;
+    color: white;
+    border-radius: 1em;
+    margin-top: .5em;
+    transition: all .2s ease-in;
+}
+
+.save-btn:hover {
+    border-radius: .2em;
+    color: #0597F2;
+    background-color: white;
+    cursor: pointer;
+}
+
+/* SPOTIFY RESULT SECTION */
+
+.playlist-container {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.playlist-title {
+    font-size: 1.5em;
+}
+
+.playlist-container li {
+    padding: .5em;
+    color: #0597F2;
+    text-align: center;
+}
+
+.playlist-data {
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 2em;
+    border-radius: 1em;
+}
+
+.playlist-songs {
+    background-color: var(--dark-blue);
+    padding: .4em;
+    border-radius: 1em;
+    margin-top: 1.4em;
+}
+
+.playlist-songs li {
+    color: white;
+}
+
+hr { display: block; height: 1px;
+    border: 0; border-top: 1px solid rgb(255, 255, 255);
+    margin: .5em; padding: 0; }
+
+.page-title{
+    color: var(--dark-red);
+    text-align: center;
+}
+.game-list{
+    display: flex;
+    flex-direction: row ;
+    flex-wrap: wrap;
+    list-style: none;
+    flex: 1 0 20%;
+    margin: 5px;
+    height: 100px;
+}
+
+.game-list-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0px 5px 10px;
+}
+
+.game-img{
+    width: 80px;
+    height: 80px;
+    background-color: ivory;
+    border-radius: 20px;
+}
+
+a:hover{
+    color: lightcoral;
+}

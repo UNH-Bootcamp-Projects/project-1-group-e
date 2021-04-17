@@ -105,6 +105,8 @@ $(function (){
         console.log('%c Init', 'color: #0455BF;');
 
         elements.searchForm.on('submit', searchGames);
+        // Initialize collapse button
+        $('.sidenav').sidenav();
     }
 
     init();
