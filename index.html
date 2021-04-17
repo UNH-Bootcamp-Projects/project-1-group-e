@@ -8,21 +8,44 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Materialize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
     <!-- Custom -->
     <link rel="stylesheet" href="./assets/css/style.css">
 
 </head>
 <body>
+    <section class="sidenav">
+    <ul id="slide-out" class="sidenav">
+      <li><div class="user-view">
+        <div class="background">
+          <img src="images/office.jpg">
+        </div>
+        <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
+        <a href="#name"><span class="white-text name">John Doe</span></a>
+        <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+      </div></li>
+      <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+      <li><a href="#!">Second Link</a></li>
+      <li><div class="divider"></div></li>
+      <li><a class="subheader">Subheader</a></li>
+      <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+    </ul>
+    <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+</section>
+    
+    <section class="home-page">
+        <div class="gamer-art">
+            <img src="./assets/images/Gamer-Clipart.png" alt="gamer-clipart">
+        </div>  
 
-    <div class="gamer-art">
-    <img src="./assets/images/Gamer-Clipart.png">
-    </div>  
-    <h2 class="site-title">GamePulse</h2>
+        <h2 class="site-title">GamePulse</h2>
 
-    <p class="mission">Play Video Games. Discover New Music. Jam Out.</p>
-    <form class="search-bar" action="">
-      <input type="text" placeholder="Type in a Video Game..." name="search">
-    </form>
+        <p class="mission">Play Video Games. Discover New Music. Jam Out.</p>
+
+        <form class="search-bar" action="">
+            <input type="text" placeholder="Type in a Video Game..." name="search">
+        </form>
+    </section>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
