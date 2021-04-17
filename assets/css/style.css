@@ -121,6 +121,12 @@ form.search-bar input[type=text] {
     padding: 12px 20px 12px 40px;
 }
 
+.material-icons {
+    font-size: 50px;
+    color: var(--dark-red);
+    padding: 20px;
+}
+
 /* Sticky footer to be used for later! */
 
 /* .footer {
