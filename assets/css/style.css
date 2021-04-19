@@ -1,6 +1,7 @@
 /* Variables */
 :root {
     /* Colors */
+    --white: #fff;
     --dark-red: #8C0F31;
     --light-red: #F24141;
     --dark-blue: #0455BF;
@@ -146,164 +147,13 @@ form.search-bar .text-input {
     color: black;
 } */
 
-/* ~~~~~ RESULTS PAGE STYLING ~~~~~ */
+/* ~~~~~ GAMES PAGE ~~~~~ */
 
-.results-page-container {
-    height: 100vh;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    box-sizing: border-box;
-    padding: 15em;
-}
-
-.results-page-container i {
-    color: white;
-    cursor: pointer;
-    transition: all .2s ease;
-}
-
-.results-page-container i:hover {
-    color: var(--dark-blue);
-}
-
-
-.result-title {
-    font-size: 2em;
-    text-align: center;
-    color: white;
-}
-
-.perfect-pair {
-    font-size: 2em;
-    text-align: center;
-    margin: .2em;
-    color: white;
-}
-
-.game-song {
-    font-size: 1em;
-    margin: .8em;
-    color: white;
-}
-
-.shuffle-text {
-    text-align: center;
-    color: white;
-}
-
-/* VIDEOGAME RESULT SECTION */
-
-.videogame-container {
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.game-card {
-    background-color: aliceblue;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 4em 6em 4em 6em;
-    border-radius: 1em;
-}
-
-.game-card ul {
-    line-height: 1.7em;
-    margin: 0em;
-    text-align: center;
-    color: #0597F2;
-}
-
-.game-image {
-    width: 9em;
-    height: 12em;
-    background-color: grey;
-    margin-bottom: 2em;
-}
-
-/* MIDDLE SECTION WITH MSG & SAVE BUTTON */
-
-.middle-container{
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.save-btn {
-    width: 30%;
-    padding: .4em 1em .4em 1em;
-    background-color: (var(--light-red));
-    border-color: white;
-    color: white;
-    border-radius: 1em;
-    margin-top: .5em;
-    transition: all .2s ease-in;
-}
-
-.save-btn:hover {
-    border-radius: .2em;
-    color: #0597F2;
-    background-color: white;
-    cursor: pointer;
-}
-
-/* SPOTIFY RESULT SECTION */
-
-.playlist-container {
-    width: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-.playlist-title {
-    font-size: 1.5em;
-}
-
-.playlist-container li {
-    padding: .5em;
-    color: #0597F2;
-    text-align: center;
-}
-
-.playlist-data {
-    background-color: aliceblue;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 2em;
-    border-radius: 1em;
-}
-
-.playlist-songs {
-    background-color: var(--dark-blue);
-    padding: .4em;
-    border-radius: 1em;
-    margin-top: 1.4em;
-}
-
-.playlist-songs li {
-    color: white;
-}
-
-hr { display: block; height: 1px;
-    border: 0; border-top: 1px solid rgb(255, 255, 255);
-    margin: .5em; padding: 0; }
-
-.page-title{
+.games-page .page-title {
     color: var(--dark-red);
     text-align: center;
 }
-.game-list{
+.games-page .game-list {
     display: flex;
     flex-direction: row ;
     flex-wrap: wrap;
@@ -313,7 +163,7 @@ hr { display: block; height: 1px;
     height: 100px;
 }
 
-.game-list-item{
+.games-page .game-list-item {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -321,13 +171,154 @@ hr { display: block; height: 1px;
     margin: 20px 0px 5px 10px;
 }
 
-.game-img{
+.games-page .game-img {
     width: 80px;
     height: 80px;
     background-color: ivory;
     border-radius: 20px;
 }
 
-a:hover{
-    color: lightcoral;
+/* ~~~~~ RESULTS PAGE ~~~~~ */
+
+.results-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.results-page .result-container {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 35%;
+}
+
+.results-page .title {
+    font-size: 2rem;
+    text-align: center;
+    color: var(--white);
+    margin: 0 0 1.5rem;
+}
+
+.results-page .subtitle {
+    font-size: 1rem;
+    margin: 0 0 .8rem 0;
+    color: var(--white);
+}
+
+.results-page .result-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 1rem;
+    background-color: var(--white);
+    width: 100%;
+    min-height: 480px;
+    padding: 2rem;
+    margin: 0 0 1.5rem 0;
+}
+
+.results-page .card-title {
+    color: var(--blue);
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 0 0 1rem 0;
+}
+
+.results-page .shuffle-btn {
+    color: var(--white);
+    border: none;
+    background: none;
+    width: auto;
+    height: auto;
+    padding: 0;
+    cursor: pointer;
+}
+
+.results-page .shuffle-btn:hover,
+.results-page .shuffle-btn:focus {
+    color: var(--dark-blue);
+}
+
+.shuffle-btn .shuffle-text {
+    display: block;
+    margin: 0 0 .5rem 0;
+}
+
+/* VIDEOGAME RESULT SECTION */
+
+.game-result-card .game-image {
+    width: 9rem;
+    height: 12rem; /* temporary style */
+    background-color: grey; /* temporary style */
+    margin: 0 auto 2rem auto;
+}
+
+.game-result-card .game-info-list {
+    list-style: none;
+    color: var(--blue);
+    text-align: center;
+    margin: 0 auto;
+}
+
+.game-result-card .info-item {
+    margin: 0 0 .3rem 0;
+}
+
+/* MIDDLE SECTION WITH MSG & SAVE BUTTON */
+
+.results-page .middle-container {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.results-page .save-btn {
+    width: 30%;
+    padding: .4rem 1rem;
+    color: var(--white);
+    border-color: var(--white);
+    border-radius: 1rem;
+    background-color: transparent;
+    margin-top: .5rem;
+    cursor: pointer;
+    transition: all .2s ease-in;
+}
+
+.results-page .save-btn:hover {
+    border-radius: .2rem;
+    color: var(--blue);
+    background-color: var(--white);
+}
+
+/* MISUC RESULT SECTION */
+
+.music-result-card .tracks-list {
+    color: var(--white);
+    border-radius: 1rem;
+    background-color: var(--dark-blue);
+    width: 100%;
+    max-height: 380px;
+    padding: 1rem;
+    margin: 0;
+    overflow: auto;
+}
+
+.music-result-card .track-item {
+    border-bottom: 1px solid;
+    padding: 1rem 0;
+}
+
+.music-result-card .track-item:last-child {
+    border-bottom: none;
 }

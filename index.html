@@ -53,7 +53,7 @@
     </section>
 
     <!-- Games Search Results Section -->
-    <section class="game-page hide">
+    <section class="games-page hide">
         <h3 class="page-title">Game Pulse</h3>
         <p class="mission">Pick a Game</p>
 
@@ -102,56 +102,53 @@
     </section>
 
     <!--Results Page Section-->
-    <section class="results-page-container hide">
+    <section class="results-page hide">
         <!--Left Videogame Result Section-->
-        <div class="videogame-container">
-            <h2 class="result-title">Video Game
-            </h2>
-            <div class="game-card">
-                <div class="game-image">
-                </div>
-                <ul>
-                    <li class="game-data game-name">Game Name</li>
-                    <li class="game-data game-rating">9.5 Rating</li>
-                    <li class="game-data release-date">Release Date</li>
-                    <li class="game-data game-genre">Genre</li>
-                    <li class="game-data platform-icon">Platform Icon</li>
+        <div class="result-container videogame-container">
+            <h2 class="title">Video Game</h2>
+            <div class="result-card game-result-card">
+                <div class="game-image"></div>
+                <ul class="game-info-list">
+                    <li class="info-item game-name">Game Name</li>
+                    <li class="info-item game-rating">9.5 Rating</li>
+                    <li class="info-item release-date">Release Date</li>
+                    <li class="info-item game-genre">Genre</li>
+                    <li class="info-item platform-icon">Platform Icon</li>
                 </ul>
             </div>
-            <p class="shuffle-text">Shuffle</p>
-            <i class="material-icons small">shuffle</i>
+            <button class="shuffle-btn js-game-shuffle" type="button">
+                <span class="shuffle-text">Shuffle</span>
+                <i class="material-icons small">shuffle</i>
+            </button>
         </div>
         <!--Middle Section & Save Button-->
         <div class="middle-container">
-            <h1 class="perfect-pair">The Perfect Pair</h1>
-            <h2 class="game-song">Videogame Name & Playlist Name</h2>
+            <h2 class="title">The Perfect Pair</h2>
+            <h3 class="subtitle">Videogame Name & Playlist Name</h3>
             <button class="save-btn">Save</button>
         </div>
         <!--Right Spotify Result Section-->
-        <div class="playlist-container">
-            <h2 class="result-title">Playlist</h2>
-            <div class="playlist-data">
-                <ul class="playlist-result-list">
-                    <li class="playlist-title playlist-data">Playlist Title & Genre</li>
-                    <div class="playlist-songs">
-                        <ul>
-                            <li class="playlist-song">Example Song (Featuring Example Artist)</li>
-                            <hr>
-                            <li class="playlist-song">Example Song by Example Artist</li>
-                            <hr>
-                            <li class="playlist-song">Example Song</li>
-                            <hr>
-                            <li class="playlist-song">Example Song</li>
-                            <hr>
-                            <li class="playlist-song">Example Song</li>
-                            <hr>
-                            <li class="playlist-song">Example Song</li>
-                        </ul>
-                    </div>
+        <div class="result-container playlist-container">
+            <h2 class="title">Tracks</h2>
+            <div class="result-card music-result-card">
+                <h3 class="card-title">Playlist Title & Genre</h3>
+                <ul class="tracks-list">
+                    <li class="track-item">Example Song (Featuring Example Artist)</li>
+                    <li class="track-item">Example Song by Example Artist</li>
+                    <li class="track-item">Example Song</li>
+                    <li class="track-item">Example Song</li>
+                    <li class="track-item">Example Song</li>
+                    <li class="track-item">Example Song</li>
+                    <li class="track-item">Example Song (Featuring Example Artist)</li>
+                    <li class="track-item">Example Song by Example Artist</li>
+                    <li class="track-item">Example Song</li>
+                    <li class="track-item">Example Song</li>
                 </ul>
             </div>
-            <p class="shuffle-text">Shuffle</p>
-            <i class="material-icons small">shuffle</i>
+            <button class="shuffle-btn js-music-shuffle" type="button">
+                <span class="shuffle-text">Shuffle</span>
+                <i class="material-icons small">shuffle</i>
+            </button>
         </div>
     </section>
 
