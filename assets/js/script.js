@@ -12,6 +12,11 @@ $(function (){
         format: 'json',
     }
 
+    let musicApiData = {
+        clientId: '9f0ad941c5394f4ca74562dbeaa29135',
+        clientSecret: '112c92661a7b4d779c01b08c3210ea94',
+    }
+
     /* Game Search */
 
     function proxyFetch(url, options) {
@@ -101,12 +106,64 @@ $(function (){
 
     /* END Game Search */
 
+    /* Get Music Data */
+
+    async function getMusicApiToken() {
+        let result = await fetch('https://accounts.spotify.com/api/token', {
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/x-www-form-urlencoded', 
+                'Authorization' : 'Basic ' + btoa(musicApiData.clientId + ':' + musicApiData.clientSecret)
+            },
+            body: 'grant_type=client_credentials'
+        });
+
+        let data = await result.json();
+
+        return data.access_token;
+    }
+
+    async function getMusicGenres() {
+        let token = await getMusicApiToken();
+
+        let result = await fetch('https://api.spotify.com/v1/recommendations/available-genre-seeds', {
+            method: 'GET',
+            headers: { 'Authorization' : 'Bearer ' + token}
+        });
+
+        let data = await result.json();
+
+        return data;
+    }
+
+    async function getRecommendationByGenre() {
+        let token = await getMusicApiToken();
+        let genres = await getMusicGenres().then((data) => {
+            return data.genres;
+        });
+
+        let result = await fetch(`https://api.spotify.com/v1/recommendations?seed_genres=${genres[0]}&limit=10`, {
+            method: 'GET',
+            headers: { 'Authorization' : 'Bearer ' + token}
+        });
+
+        let data = await result.json();
+
+        return data;
+    }
+
+    /* END Get Music Data */
+
     function init() {
         console.log('%c Init', 'color: #0455BF;');
 
         elements.searchForm.on('submit', searchGames);
         // Initialize collapse button
         $('.sidenav').sidenav();
+        getRecommendationByGenre()
+            .then((data) => {
+                console.log(data.tracks);
+            });
     }
 
     init();
