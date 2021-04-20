@@ -10,6 +10,11 @@
 }
 /* END Variables */
 
+.invisible {
+    opacity: 0 !important;
+    visibility: hidden !important;
+}
+
 body {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     background-color: var(--light-blue);
@@ -244,8 +249,13 @@ form.search-bar .text-input {
     cursor: pointer;
 }
 
-.results-page .shuffle-btn:hover,
-.results-page .shuffle-btn:focus {
+.results-page .shuffle-btn:disabled {
+    opacity: .5;
+    pointer-events: none;
+}
+
+.results-page .shuffle-btn:not(:disabled):hover,
+.results-page .shuffle-btn:not(:disabled):focus {
     color: var(--dark-blue);
 }
 
@@ -314,11 +324,68 @@ form.search-bar .text-input {
     overflow: auto;
 }
 
-.music-result-card .track-item {
+.tracks-list .track-item {
+    --thumb-width: 64px;
+    --thumb-indent: .5rem;
     border-bottom: 1px solid;
-    padding: 1rem 0;
 }
 
-.music-result-card .track-item:last-child {
+.tracks-list .track-item:last-child {
     border-bottom: none;
+}
+
+.track-item > a {
+    display: flex;
+    justify-content: flex-start;
+    color: inherit;
+    padding: 1rem .4rem;
+}
+
+.track-item > a:hover {
+    background-color: var(--light-red);
+}
+
+.track-item .thumb {
+    width: var(--thumb-width);
+    margin: 0 var(--thumb-indent) var(--thumb-indent) 0;
+}
+
+.track-item .thumb img {
+    display: block;
+    width: 100%;
+}
+
+.track-item p {
+    margin: 0;
+}
+
+.track-item .track-info {
+    width: calc(100% - var(--thumb-width) - var(--thumb-indent));
+}
+
+.track-item .track-name {
+    font-size: 1.2rem;
+    line-height: 1;
+    font-weight: bold;
+    margin: 0 0 .2rem 0;
+}
+
+.track-item .about-track {
+    font-size: .8rem;
+}
+
+.track-item .about-track span {
+    display: inline-block;
+}
+
+.track-item .about-track .artists {
+    font-size: 1rem;
+    width: 100%;
+    margin: 0 0 .5rem 0;
+}
+
+.track-item .about-track .album,
+.track-item .about-track .separator,
+.track-item .about-track .release-year {
+    opacity: .75;
 }
