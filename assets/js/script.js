@@ -264,6 +264,7 @@ $(function (){
 
         genreTitle.text(`Playlist genres: ${genres[genreIndex]}`);
 
+        console.log(data);
         return data;
     }
 
@@ -288,9 +289,21 @@ $(function (){
                         name: item.name,
                         url: item.external_urls.spotify,
                     }
+                    let previewUrl = item.preview_url;
+                    let trackPreview = ``;
+
+                    if (previewUrl !== null) {
+                        trackPreview = `
+                            <div class="track-preview js-track-preview">
+                                <i class="material-icons small">play_circle_outline</i>
+                                <audio src="${previewUrl}">
+                            </div>
+                        `;
+                    }
 
                     let trackItem = $(`
                         <li class="track-item">
+                            ${trackPreview}
                             <a href="${track.url}" target="_blank" rel="external">
                                 <div class="thumb">
                                     <img src="${thumbUrl}" alt="${albumName}">
@@ -313,9 +326,26 @@ $(function (){
                     tracksList.append(trackItem);
                 });
 
+                elements.musicResults.on('click', '.js-track-preview', playMusicPreview);
                 elements.musicResults.removeClass('invisible');
                 elements.musicShuffle.removeAttr('disabled');
             });
+    }
+
+    function playMusicPreview(event) {
+        event.stopPropagation();
+        let eventElem = $(event.currentTarget);
+        let icon = eventElem.find('.material-icons');
+        let audio = eventElem.find('audio')[0];
+
+        if (audio.paused == false) {
+            audio.pause();
+            icon.text('play_circle_outline');
+        } else {
+            audio.volume = 0.2;
+            audio.play();
+            icon.text('pause_circle_outline');
+        }
     }
 
     /* END Music Data */

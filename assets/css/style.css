@@ -378,20 +378,59 @@ form.search-bar .text-input {
 }
 
 .tracks-list .track-item {
-    --thumb-width: 64px;
-    --thumb-indent: .5rem;
+    --track-item-top-indent: 1rem;
+    --track-item-left-indent: .5rem;
+    --track-thumb-size: 64px;
+    --track-thumb-indent: .5rem;
     border-bottom: 1px solid;
+    position: relative;
 }
 
 .tracks-list .track-item:last-child {
     border-bottom: none;
 }
 
+.track-item .track-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    text-shadow: 0 0 .2rem rgba(0, 0, 0, .5);
+    width: var(--track-thumb-size);
+    height: var(--track-thumb-size);
+    position: absolute;
+    top: var(--track-item-top-indent);
+    left: var(--track-item-left-indent);
+    z-index: 2;
+    cursor: pointer;
+}
+
+.track-item .track-preview::before {
+    content: '';
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    opacity: .5;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.track-item .track-preview:hover::before,
+.track-item .track-preview:focus::before {
+    background-color: var(--light-red);
+}
+
+.track-item .track-preview i {
+    position: relative;
+    z-index: 2;
+}
+
 .track-item > a {
     display: flex;
     justify-content: flex-start;
     color: inherit;
-    padding: 1rem .4rem;
+    padding: var(--track-item-top-indent) var(--track-item-left-indent);
 }
 
 .track-item > a:hover {
@@ -399,8 +438,9 @@ form.search-bar .text-input {
 }
 
 .track-item .thumb {
-    width: var(--thumb-width);
-    margin: 0 var(--thumb-indent) var(--thumb-indent) 0;
+    width: var(--track-thumb-size);
+    height: var(--track-thumb-size);
+    margin: 0 var(--track-thumb-indent) var(--track-thumb-indent) 0;
 }
 
 .track-item .thumb img {
@@ -413,7 +453,7 @@ form.search-bar .text-input {
 }
 
 .track-item .track-info {
-    width: calc(100% - var(--thumb-width) - var(--thumb-indent));
+    width: calc(100% - var(--track-thumb-size) - var(--track-thumb-indent));
 }
 
 .track-item .track-name {
