@@ -130,22 +130,11 @@
         <!--Right Spotify Result Section-->
         <div class="result-container playlist-container">
             <h2 class="title">Tracks</h2>
-            <div class="result-card music-result-card">
-                <h3 class="card-title">Playlist Title & Genre</h3>
-                <ul class="tracks-list">
-                    <li class="track-item">Example Song (Featuring Example Artist)</li>
-                    <li class="track-item">Example Song by Example Artist</li>
-                    <li class="track-item">Example Song</li>
-                    <li class="track-item">Example Song</li>
-                    <li class="track-item">Example Song</li>
-                    <li class="track-item">Example Song</li>
-                    <li class="track-item">Example Song (Featuring Example Artist)</li>
-                    <li class="track-item">Example Song by Example Artist</li>
-                    <li class="track-item">Example Song</li>
-                    <li class="track-item">Example Song</li>
-                </ul>
+            <div class="result-card music-result-card invisible js-music-results">
+                <h3 class="card-title js-genre-name"></h3>
+                <ul class="tracks-list js-tracks-list"></ul>
             </div>
-            <button class="shuffle-btn js-music-shuffle" type="button">
+            <button class="shuffle-btn js-music-shuffle" type="button" disabled>
                 <span class="shuffle-text">Shuffle</span>
                 <i class="material-icons small">shuffle</i>
             </button>
@@ -161,6 +150,8 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <!-- Day js -->
+    <script src="https://cdn.jsdelivr.net/npm/dayjs@1.10.4/dayjs.min.js"></script>
     <!-- Materialize -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <!-- Custom -->
