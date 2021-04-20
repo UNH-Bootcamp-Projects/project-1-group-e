@@ -2,8 +2,14 @@
 
 $(function (){
     let elements = {
+        searchSection: $('.js-search-section'),
+        gamesSection: $('.js-games-section'),
+        resultSection: $('.js-result-section'),
         searchForm: $('.js-search-form'),
+        gamesList: $('.js-games-list'),
         showMoreBtn: $('.js-load-more'),
+        gameResults: $('.js-game-results'),
+        gameShuffle: $('.js-game-shuffle'),
         musicResults: $('.js-music-results'),
         musicShuffle: $('.js-music-shuffle'),
     }
@@ -11,7 +17,6 @@ $(function (){
     let gameApiData = {
         url: 'https://www.giantbomb.com/api/',
         key: 'ca21f96f411cc413f9234dbec4a20f729ca3fb2b',
-        format: 'json',
     }
 
     let musicApiData = {
@@ -24,6 +29,23 @@ $(function (){
         return Math.floor(Math.random() * Math.floor(max));
     }
 
+    function hideSection(section) {
+        if (!section.hasClass('hide')) {
+            section.addClass('hide');
+        }
+    }
+
+    function showSection(section) {
+        if (section.hasClass('hide')) {
+            section.removeClass('hide');
+        }
+    }
+
+    function backToSearch() {
+        hideSection(elements.resultSection);
+        showSection(elements.searchSection);
+    }
+
     /* Game Search */
 
     function proxyFetch(url, options) {
@@ -33,7 +55,7 @@ $(function (){
     }
 
     function searchGames(event) {
-        console.log('%c Get Searched Game Data ', 'color: #05AFF2;');
+        // console.log('%c Search Games ', 'color: #05AFF2;');
         event.preventDefault();
 
         let eventElem = $(event.currentTarget);
@@ -42,8 +64,10 @@ $(function (){
 
         let searchQuery = '';
         let page = 1;
+        let limit = 12;
 
         if (isForm) {
+            elements.gamesList.text('');
             searchQuery = eventElem.find('input[type="search"]').val().trim();
         }
 
@@ -52,7 +76,7 @@ $(function (){
             page = eventElem.data('page');
         }
 
-        let requestUrl = `${gameApiData.url}search/?format=${gameApiData.format}&api_key=${gameApiData.key}&resources=game&query=${encodeURI(searchQuery)}&page=${page}`;
+        let requestUrl = `${gameApiData.url}search/?format=json&api_key=${gameApiData.key}&resources=game&query=${encodeURI(searchQuery)}&limit=${limit}&page=${page}`;
 
         proxyFetch(requestUrl)
             .then((response) => {
@@ -61,13 +85,13 @@ $(function (){
                     return response.json();
                 }
             })
-            .then((body) => {
-                console.log(body);
-                if (body !== undefined) {
-                    displayGamesSearchResults(body.results);
+            .then((data) => {
+                console.log(data);
+                if (data !== undefined) {
+                    displayGamesSearchResults(data.results);
 
-                    let itemOnPage = body.number_of_page_results;
-                    let loadLimit = body.limit;
+                    let itemOnPage = data.number_of_page_results;
+                    let loadLimit = data.limit;
 
                     if (itemOnPage === loadLimit) {
                         elements.showMoreBtn
@@ -86,7 +110,7 @@ $(function (){
     }
 
     function loadMoreResults(event) {
-        console.log('%c Load More Results ', 'color: #05AFF2;');
+        // console.log('%c Load More Results ', 'color: #05AFF2;');
         $(event.currentTarget)
             .attr('disabled', true)
             .off('click.loadMore');
@@ -95,23 +119,100 @@ $(function (){
     }
 
     function displayGamesSearchResults(searchedData) {
-        console.log('%c Display Game Search Results ', 'color: #F24141;');
+        // console.log('%c Display Game Search Results ', 'color: #F24141;');
 
         searchedData.forEach((item) => {
-            let displayedData = {
-                gameName: item.name, // alternative 'item.aliases'
-                // gameDesc: item.deck,
-                gameThumb: item.image.thumb_url,
-                // releaseDate: item.original_release_date,
-                // platformNames: item.platforms.map((currentValue) => currentValue.name),
-                // gameImage: item.image.medium_url, // alternative 'item.image.original_url'
-                // gaintBombUrl: item.site_detail_url,
-                gameId: item.guid,
+            let gameInfo = {
+                name: item.name,
+                thumb: item.image.small_url,
+                id: item.guid,
             };
+
+            let gameItem = $(`
+                <li class="game-item">
+                    <div class="game-img">
+                        <img src="${gameInfo.thumb}" alt="${gameInfo.name}">
+                    </div>
+                    <h2 class="game-name">${gameInfo.name}</h2>
+                </li>
+            `);
+
+            gameItem
+                .data('game-id', gameInfo.id)
+                .on('click', selectGame);
+
+            elements.gamesList.append(gameItem);
         });
+
+        hideSection(elements.searchSection);
+        showSection(elements.gamesSection);
     }
 
     /* END Game Search */
+
+    /* Game Data */
+
+    function selectGame(event) {
+        // console.log('Select Game');
+        let eventElem = $(event.currentTarget);
+        let gameId = eventElem.data('game-id');
+
+        if (gameId !== undefined) {
+            let requestUrl = `${gameApiData.url}game/${gameId}/?format=json&api_key=${gameApiData.key}`;
+
+            proxyFetch(requestUrl)
+                .then((response) => {
+                    if (response.ok){
+                        return response.json();
+                    }
+                })
+                .then((data) => {
+                    // console.log(data);
+                    displayGameData(data.results);
+                });
+        }
+    }
+
+    function displayGameData(gameData) {
+        // console.log('Display Game Data');
+
+        let gameInfo = {
+            name: gameData.name,
+            img: gameData.image.medium_url,
+            deck: gameData.deck,
+            releaseDate: dayjs(gameData.original_release_date, 'YYYY-MM-DD').format('D MMM YYYY'),
+            genres: gameData.genres.map((item) => {
+                return item.name;
+            }),
+            platforms: gameData.platforms.map((item) => {
+                return item.name;
+            }),
+        };
+
+        let gameElem = $(`
+            <div class="game-image">
+                <img src="${gameInfo.img}" alt="${gameInfo.name}">
+            </div>
+            <ul class="game-info-list">
+                <li class="info-item game-name">${gameInfo.name}</li>
+                <li class="info-item release-date">${gameInfo.releaseDate}</li>
+                <li class="info-item game-desc">${gameInfo.deck}</li>
+                <li class="info-item game-genre">${gameInfo.genres.reduce((accum, value, index) => {
+                    return accum + (index !== gameInfo.genres.length ? ', ' : '') + value;
+                })}</li>
+                <li class="info-item platform-icon">${gameInfo.platforms.reduce((accum, value, index) => {
+                    return accum + (index !== gameInfo.platforms.length ? ', ' : '') + value;
+                })}</li>
+            </ul>
+        `);
+
+        elements.gameResults.text('').append(gameElem);
+
+        hideSection(elements.gamesSection);
+        showSection(elements.resultSection);
+    }
+
+    /* END Game Data */
 
     /* Music Data */
 
@@ -227,6 +328,7 @@ $(function (){
         $('.sidenav').sidenav();
         displayMusicData();
         elements.musicShuffle.on('click', displayMusicData);
+        elements.gameShuffle.on('click', backToSearch);
     }
 
     init();
