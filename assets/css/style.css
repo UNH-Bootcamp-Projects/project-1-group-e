@@ -7,6 +7,9 @@
     --dark-blue: #0455BF;
     --blue: #0597F2;
     --light-blue: #05AFF2;
+
+    /* Sizes */
+    --max-width: 1440px;
 }
 /* END Variables */
 
@@ -104,7 +107,6 @@ body {
 }
 /* End of animations for gamer-art*/
 
-  
 .site-title, .mission {
     color: var(--dark-red);
     text-align: center;
@@ -154,33 +156,81 @@ form.search-bar .text-input {
 
 /* ~~~~~ GAMES PAGE ~~~~~ */
 
+.games-page {
+    text-align: center;
+    max-width: var(--max-width);
+    margin: 0 auto 3rem auto;
+}
+
 .games-page .page-title {
     color: var(--dark-red);
-    text-align: center;
 }
+
+.games-page .subtitle {
+    color: var(--dark-red);
+    font-size: 1rem;
+    margin: 0 0 1rem 0;
+}
+
 .games-page .game-list {
-    display: flex;
-    flex-direction: row ;
-    flex-wrap: wrap;
     list-style: none;
-    flex: 1 0 20%;
-    margin: 5px;
-    height: 100px;
-}
-
-.games-page .game-list-item {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    flex-wrap: wrap;
     justify-content: center;
-    margin: 20px 0px 5px 10px;
 }
 
-.games-page .game-img {
-    width: 80px;
-    height: 80px;
-    background-color: ivory;
-    border-radius: 20px;
+.game-list .game-item {
+    color: var(--dark-blue);
+    border-radius: 1rem;
+    background-color: var(--white);
+    width: calc(16.66% - 2rem);
+    padding: 1rem;
+    margin: 0 1rem 2rem 1rem;
+    cursor: pointer;
+    transition: color .2s ease-in,
+        background-color .2s ease-in;
+}
+
+.game-list .game-item:hover {
+    color: var(--white);
+    background-color: var(--light-red);
+}
+
+.game-list .game-img {
+    border-radius: .5rem;
+    width: 100%;
+    margin: 0 0 1rem 0;
+    overflow: hidden;
+}
+
+.game-list .game-img img {
+    display: block;
+    width: 100%;
+}
+
+.game-list .game-name {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+@media screen and (max-width: 1024px) {
+    .game-list .game-item {
+        width: calc(25% - 2rem);
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .game-list .game-item {
+        width: calc(50% - 2rem);
+    }
+}
+
+@media screen and (max-width: 375px) {
+    .game-list .game-item {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
 }
 
 /* ~~~~~ RESULTS PAGE ~~~~~ */
@@ -192,7 +242,7 @@ form.search-bar .text-input {
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    max-width: 1440px;
+    max-width: var(--max-width);
     margin: 0 auto;
     padding: 2rem;
 }
@@ -268,9 +318,12 @@ form.search-bar .text-input {
 
 .game-result-card .game-image {
     width: 9rem;
-    height: 12rem; /* temporary style */
-    background-color: grey; /* temporary style */
     margin: 0 auto 2rem auto;
+}
+
+.game-result-card .game-image img {
+    display: block;
+    width: 100%;
 }
 
 .game-result-card .game-info-list {
