@@ -37,24 +37,20 @@
       </nav>
 
     <section class="side-nav-bar">
-        <ul id="slide-out" class="sidenav">
-            <li>
-                <div class="user-view">
-                    <div class="background">
-                        <div class="tenor-gif-embed" data-postid="3535566" data-share-method="host" data-width="100%" data-aspect-ratio="1.775"><a href="https://tenor.com/view/sound-wave-wave-sound-gif-3535566">Yas GIF</a> from <a href="https://tenor.com/search/soundwave-gifs">Soundwave GIFs</a></div><script type="text/javascript" async src="https://tenor.com/embed.js"></script>
-                    </div>
-                    <a href="#user"><img class="circle" src="./assets/images/Gamer-Clipart.png"></a>
-                    <a href="#name"><span class="white-text name">GamePulse</span></a>
+        <div id="sidenav" class="sidenav">
+            <div class="user-view">
+                <div class="background">
+                    <div class="tenor-gif-embed" data-postid="3535566" data-share-method="host" data-width="100%" data-aspect-ratio="1.775"><a href="https://tenor.com/view/sound-wave-wave-sound-gif-3535566">Yas GIF</a> from <a href="https://tenor.com/search/soundwave-gifs">Soundwave GIFs</a></div><script type="text/javascript" async src="https://tenor.com/embed.js"></script>
                 </div>
-            </li>
-            <li><a class="waves-effect" href="#!"><i class="material-icons history-icon">history</i>Go Back to Last Pairing</a></li>
-            <li><div class="divider"></div></li>
-            <li><a class="subheader">Recently Saved Pairings:</a></li>
-            <li><a class="waves-effect" href="#!">-- Empty --</a></li>
-            <li><a class="waves-effect" href="#!">-- Empty --</a></li>
-            <li><a class="waves-effect" href="#!">-- Empty --</a></li>
-        </ul>
-        <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons save-icon">save</i></a>
+                <a href="#user"><img class="circle" src="./assets/images/Gamer-Clipart.png"></a>
+                <a href="#name"><span class="white-text name">GamePulse</span></a>
+            </div>
+            <div class="sidenav-body">
+                <h2 class="title">Recently Saved Pairings:</h2>
+                <ul class="pairs-list js-pairs-list"></ul>
+            </div>
+        </div>
+        <span class="sidenav-trigger" data-target="sidenav"><i class="material-icons save-icon">save</i></span>
     </section>
 
     <!--Homepage Search Section-->
@@ -99,7 +95,7 @@
             <button class="shuffle-btn js-game-shuffle btn w-25" type="button">
                 <span class="shuffle-text">New Game</span>
             </button>
-            <button class="save-btn btn w-25">Save</button>
+            <button class="save-btn btn w-25 modal-trigger" data-target="save-pair-modal">Save</button>
             </div>
         </div>
         <!--Right Spotify Result Section-->
@@ -111,12 +107,25 @@
                 <i class="material-icons small">shuffle</i>
             </button>
             </div>
-            <div class="music-result-card invisible js-music-results">
+            <div class="music-result-card js-music-results">
                 <h3 class="js-genre-name"></h3>
                 <ul class="tracks-list js-tracks-list"></ul>
             </div>
         </div>
     </section>
+
+    <div id="save-pair-modal" class="modal">
+        <form class="js-save-pair-form">
+            <div class="modal-content">
+                <h4>Save Pair</h4>
+                <input class="text-input js-pair-name" type="text" placeholder="Enter Pair name" name="pair-name" required>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-close btn" type="button">Cancel</button>
+                <button class="btn" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
 
     <!-- <div class="footer">
         <p>Created By: | &#169; 2021 </p>
