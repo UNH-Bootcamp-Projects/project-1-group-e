@@ -31,9 +31,9 @@
             <li><a class="waves-effect" href="#!"><i class="material-icons history-icon">history</i>Go Back to Last Pairing</a></li>
             <li><div class="divider"></div></li>
             <li><a class="subheader">Recently Saved Pairings:</a></li>
-            <li><a class="waves-effect" href="#!">-- Empty --</a></li>
-            <li><a class="waves-effect" href="#!">-- Empty --</a></li>
-            <li><a class="waves-effect" href="#!">-- Empty --</a></li>
+            <li>
+                <ul class="js-pairs-list"></ul>
+            </li>
         </ul>
         <a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons save-icon">save</i></a>
     </section>
@@ -82,7 +82,7 @@
             <button class="shuffle-btn js-game-shuffle btn w-25" type="button">
                 <span class="shuffle-text">New Game</span>
             </button>
-            <button class="save-btn btn w-25">Save</button>
+            <button class="save-btn btn w-25 modal-trigger" data-target="save-pair-modal">Save</button>
             </div>
         </div>
         <!--Right Spotify Result Section-->
@@ -100,6 +100,19 @@
             </div>
         </div>
     </section>
+
+    <div id="save-pair-modal" class="modal">
+        <form class="js-save-pair-form">
+            <div class="modal-content">
+                <h4>Save Pair</h4>
+                <input class="text-input js-pair-name" type="text" placeholder="Enter Pair name" name="pair-name" required>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-close btn" type="button">Cancel</button>
+                <button class="btn" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
 
     <!-- <div class="footer">
         <p>Created By: | &#169; 2021 </p>

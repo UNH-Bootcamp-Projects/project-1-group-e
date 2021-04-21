@@ -1,6 +1,10 @@
 'use strict';
 
 $(function (){
+    let materializeElems = {
+        modal: $('.modal'),
+    };
+
     let elements = {
         searchSection: $('.js-search-section'),
         gamesSection: $('.js-games-section'),
@@ -12,6 +16,9 @@ $(function (){
         gameShuffle: $('.js-game-shuffle'),
         musicResults: $('.js-music-results'),
         musicShuffle: $('.js-music-shuffle'),
+        saveForm: $('.js-save-pair-form'),
+        tracksList: $('.js-tracks-list'),
+        pairsList: $('.js-pairs-list'),
     }
 
     let gameApiData = {
@@ -23,6 +30,13 @@ $(function (){
         clientId: '9f0ad941c5394f4ca74562dbeaa29135',
         clientSecret: '112c92661a7b4d779c01b08c3210ea94',
     }
+
+    let savedPairs = JSON.parse(localStorage.getItem('savedPairs')) || {};
+
+    let currentPairData = {
+        gameInfo: undefined,
+        tracksInfo: undefined,
+    };
 
     function getRandomInt(max) {
         // return random integer from 0 to 'max'
@@ -41,9 +55,22 @@ $(function (){
         }
     }
 
-    function backToSearch() {
+    function showSearchSection() {
+        hideSection(elements.gamesSection);
         hideSection(elements.resultSection);
         showSection(elements.searchSection);
+    }
+
+    function showGamesSection() {
+        hideSection(elements.searchSection);
+        hideSection(elements.resultSection);
+        showSection(elements.gamesSection);
+    }
+
+    function showResultSection() {
+        hideSection(elements.searchSection);
+        hideSection(elements.gamesSection);
+        showSection(elements.resultSection);
     }
 
     /* Game Search */
@@ -86,7 +113,7 @@ $(function (){
                 }
             })
             .then((data) => {
-                console.log(data);
+                // console.log(data);
                 if (data !== undefined) {
                     displayGamesSearchResults(data.results);
 
@@ -144,8 +171,7 @@ $(function (){
             elements.gamesList.append(gameItem);
         });
 
-        hideSection(elements.searchSection);
-        showSection(elements.gamesSection);
+        showGamesSection();
     }
 
     /* END Game Search */
@@ -168,15 +194,16 @@ $(function (){
                 })
                 .then((data) => {
                     // console.log(data);
-                    displayGameData(data.results);
+                    getMusicData();
+                    displaySelectedGameData(data.results);
+                    showResultSection();
                 });
         }
     }
 
-    function displayGameData(gameData) {
+    function displaySelectedGameData(gameData) {
         // console.log('Display Game Data');
-
-        let gameInfo = {
+        currentPairData.gameInfo = {
             name: gameData.name,
             img: gameData.image.medium_url,
             deck: gameData.deck,
@@ -191,25 +218,22 @@ $(function (){
 
         let gameElem = $(`
             <div class="game-image">
-                <img src="${gameInfo.img}" alt="${gameInfo.name}">
+                <img src="${currentPairData.gameInfo.img}" alt="${currentPairData.gameInfo.name}">
             </div>
             <ul class="game-info-list">
-                <li class="info-item game-name">${gameInfo.name}</li>
-                <li class="info-item release-date">Release Date: ${gameInfo.releaseDate}</li>
-                <li class="info-item game-desc">Description: ${gameInfo.deck}</li>
-                <li class="info-item game-genre">Genre: ${gameInfo.genres.reduce((accum, value, index) => {
-                    return accum + (index !== gameInfo.genres.length ? ', ' : '') + value;
+                <li class="info-item game-name">${currentPairData.gameInfo.name}</li>
+                <li class="info-item release-date">Release Date: ${currentPairData.gameInfo.releaseDate}</li>
+                <li class="info-item game-desc">Description: ${currentPairData.gameInfo.deck}</li>
+                <li class="info-item game-genre">Genre: ${currentPairData.gameInfo.genres.reduce((accum, value, index, array) => {
+                    return accum + (index !== array.length ? ', ' : '') + value;
                 })}</li>
-                <li class="info-item platform-icon">${gameInfo.platforms.reduce((accum, value, index) => {
-                    return accum + (index !== gameInfo.platforms.length ? ', ' : '') + value;
+                <li class="info-item platform-icon">${currentPairData.gameInfo.platforms.reduce((accum, value, index, array) => {
+                    return accum + (index !== array.length ? ', ' : '') + value;
                 })}</li>
             </ul>
         `);
 
         elements.gameResults.text('').append(gameElem);
-
-        hideSection(elements.gamesSection);
-        showSection(elements.resultSection);
     }
 
     /* END Game Data */
@@ -244,7 +268,7 @@ $(function (){
         return data;
     }
 
-    async function getRecommendationByGenre() {
+    async function getMusicRecommendationByGenre() {
         let token = await getMusicApiToken();
         let genres = await getMusicGenres().then((data) => {
             return data.genres;
@@ -264,72 +288,81 @@ $(function (){
 
         genreTitle.text(`Genre: ${genres[genreIndex]}`);
 
-        console.log(data);
+        // console.log(data);
         return data;
     }
 
-    function displayMusicData() {
+    function getMusicData() {
         if (!elements.musicShuffle.attr('disabled')) {
             elements.musicShuffle.attr('disabled', true);
         }
 
-        getRecommendationByGenre()
+        getMusicRecommendationByGenre()
             .then((data) => {
                 // console.log(data.tracks);
-                let tracksList = elements.musicResults.find('.js-tracks-list').text('');
-
-                data.tracks.forEach((item) => {
-                    let albumName = item.album.name;
-                    let thumbUrl = item.album.images[2].url;
-                    let releaseYear = dayjs(item.release_date, 'YYYY-MM-DD').format('YYYY');
-                    let artists = item.artists.map((item) => {
-                        return item.name;
-                    });
-                    let track = {
-                        name: item.name,
-                        url: item.external_urls.spotify,
-                    }
-                    let previewUrl = item.preview_url;
-                    let trackPreview = ``;
-
-                    if (previewUrl !== null) {
-                        trackPreview = `
-                            <div class="track-preview js-track-preview">
-                                <i class="material-icons small">play_circle_outline</i>
-                                <audio src="${previewUrl}">
-                            </div>
-                        `;
-                    }
-
-                    let trackItem = $(`
-                        <li class="track-item">
-                            ${trackPreview}
-                            <a href="${track.url}" target="_blank" rel="external">
-                                <div class="thumb">
-                                    <img src="${thumbUrl}" alt="${albumName}">
-                                </div>
-                                <div class="track-info">
-                                    <p class="track-name">${track.name}</p>
-                                    <p class="about-track">
-                                        <span class="artists">${artists.reduce((accum, value, index) => {
-                                            return accum + (index !== artists.length ? ', ' : '') + value;
-                                        })}</span>
-                                        <span class="album">${albumName}</span>
-                                        <span class="separator">&bull;</span>
-                                        <span class="release-year">${releaseYear}</span>
-                                    </p>
-                                </div>
-                            </a>
-                        </li>
-                    `);
-
-                    tracksList.append(trackItem);
-                });
-
-                elements.musicResults.on('click', '.js-track-preview', playMusicPreview);
-                elements.musicResults.removeClass('invisible');
-                elements.musicShuffle.removeAttr('disabled');
+                displayMusicData(data.tracks);
             });
+    }
+
+    function displayMusicData(musicData) {
+        elements.tracksList.text('');
+        currentPairData.tracksInfo = [];
+        console.log(musicData);
+
+        musicData.forEach((item) => {
+            let trackInfo = {
+                album: item.album.name,
+                thumb: item.album.images[2].url,
+                releaseYear: dayjs(item.release_date, 'YYYY-MM-DD').format('YYYY'),
+                artists: item.artists.map((item) => {
+                    return item.name;
+                }),
+                name: item.name,
+                link: item.external_urls.spotify,
+                previewUrl: item.preview_url,
+            };
+
+            let trackPreview = ``;
+
+            if (trackInfo.previewUrl !== null) {
+                trackPreview = `
+                    <div class="track-preview js-track-preview">
+                        <i class="material-icons small">play_circle_outline</i>
+                        <audio src="${trackInfo.previewUrl}">
+                    </div>
+                `;
+            }
+
+            let trackItem = $(`
+                <li class="track-item">
+                    ${trackPreview}
+                    <a href="${trackInfo.link}" target="_blank" rel="external">
+                        <div class="thumb">
+                            <img src="${trackInfo.thumb}" alt="${trackInfo.album}">
+                        </div>
+                        <div class="track-info">
+                            <p class="track-name">${trackInfo.name}</p>
+                            <p class="about-track">
+                                <span class="artists">${trackInfo.artists.reduce((accum, value, index, array) => {
+                                    return accum + (index !== array.length ? ', ' : '') + value;
+                                })}</span>
+                                <span class="album">${trackInfo.album}</span>
+                                <span class="separator">&bull;</span>
+                                <span class="release-year">${trackInfo.releaseYear}</span>
+                            </p>
+                        </div>
+                    </a>
+                </li>
+            `);
+
+            currentPairData.tracksInfo.push(trackInfo);
+
+            elements.tracksList.append(trackItem);
+        });
+
+        elements.musicResults.on('click', '.js-track-preview', playMusicPreview);
+        elements.musicResults.removeClass('invisible');
+        elements.musicShuffle.removeAttr('disabled');
     }
 
     function playMusicPreview(event) {
@@ -350,15 +383,83 @@ $(function (){
 
     /* END Music Data */
 
+    /* Pair Data */
+
+    function savePairData(event) {
+        console.log('Save Game Music Data');
+        event.preventDefault();
+
+        let pairName = $(event.currentTarget).find('.js-pair-name').val().trim();
+
+        if (currentPairData.gameInfo === undefined
+        && currentPairData.tracksInfo === undefined
+        || pairName === '') {
+            return;
+        }
+
+        let isExistedPair = savedPairs[pairName] ? true : false;
+
+        savedPairs[pairName] = currentPairData;
+
+        localStorage.setItem('savedPairs', JSON.stringify(savedPairs));
+
+        materializeElems.modal.modal('close');
+
+        if (!isExistedPair) {
+            displayPairItem(pairName);
+        }
+    }
+
+    function displayPairsList() {
+        console.log('Display Pairs List');
+        elements.pairsList.text('');
+
+        let pairs = Object.keys(savedPairs);
+
+        if (pairs.length > 0) {
+            for (let item of pairs) {
+                displayPairItem(item);
+            }
+        }
+    }
+
+    function displayPairItem(pairName) {
+        console.log('Display Pair Item');
+        // console.log(pairName);
+        let pairElem = $(`
+            <li class="pair-item">${pairName}</li>
+        `);
+
+        pairElem
+            .data({
+                'pair-name': pairName,
+            })
+            .on('click', displayPairData);
+
+        elements.pairsList.append(pairElem);
+    }
+
+    function displayPairData(event) {
+        console.log('Display Pair Data');
+        let eventElem = $(event.currentTarget);
+        let pairName = eventElem.data('pair-name');
+
+        // console.log(savedPairs[pairName]);
+    }
+
+    /* END Pair Data */
+
     function init() {
         console.log('%c Init', 'color: #0455BF;');
 
         elements.searchForm.on('submit', searchGames);
         // Initialize collapse button
         $('.sidenav').sidenav();
-        displayMusicData();
-        elements.musicShuffle.on('click', displayMusicData);
-        elements.gameShuffle.on('click', backToSearch);
+        elements.musicShuffle.on('click', getMusicData);
+        elements.gameShuffle.on('click', showSearchSection);
+        elements.saveForm.on('submit', savePairData);
+        materializeElems.modal.modal();
+        displayPairsList();
     }
 
     init();
