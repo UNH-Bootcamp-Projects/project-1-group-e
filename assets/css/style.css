@@ -19,46 +19,37 @@
 }
 
 body {
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    background-color: var(--light-blue);
-    /* Adds animation to our background, circling through our theme colors */
-    /* animation-name: backgroundColorPalette;
-	animation-duration: 5s;
-	animation-iteration-count: infinite;
-	animation-direction: alternate;
-	animation-timing-function: linear;  */
+    font-family: 'Zen Dots', cursive;
+    background: rgba(0,0,0,.5);
+    background-image: url(../images/Sound-Background.png);
+    background-size: auto;
+    animation: animatedBackground 40s linear infinite;
 }
 
-/* Adds animation to our background, circling through our theme colors */
-/* @keyframes backgroundColorPalette {
-	0% {
-		background: var(--dark-blue);
-	}
-	25% {
-		background: var(--dark-red);
-	}
-	50% {
-		background: var(--blue);
-	}
-	75% {
-		background: var(--light-red);
-	}
-	100% {
-		background: var(--light-blue);
-	}
-} */
+/* Animation for background image */
+@keyframes animatedBackground {
+    from { background-position: 0 0; }
+    to { background-position: 100% 0; }
+  }
+
+.nav-wrapper {
+    background: rgb(212, 160, 62)
+}
+
 .gamer-art img{
     display: block;
     margin-left: auto;
     margin-right: auto;
     padding: 0;
+    height: 60px;
+    width: 60px;
+    padding-top: 5px;
 }
 
 .gamer-art {
     animation: pulse 3s infinite;
     margin: 0 auto;
     display: table;
-    margin-top: 50px;
     animation-direction: alternate;
     -webkit-animation-name: pulse;
     animation-name: pulse;
@@ -75,7 +66,7 @@ body {
   
 @keyframes pulse {
     to {
-      opacity: 0.2;
+      opacity: 1;
       transform: scale(1.2);
     }
 }
@@ -89,7 +80,7 @@ body {
     content: ' ';
     height: 140%;
     left: -20%;
-    opacity: .6;
+    opacity: .6 ;
     position: absolute;
     top: -20%;
     transform: scale(0.714);
@@ -107,9 +98,18 @@ body {
 }
 /* End of animations for gamer-art*/
 
-.site-title, .mission {
-    color: var(--dark-red);
+.site-title {
+    color: black;
     text-align: center;
+    font-size: 100px;
+    font-family: 'Zen Dots', cursive;
+}
+.mission {
+    color: white;
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    font-family: 'Dosis', sans-serif;;
 }
 
 form {
