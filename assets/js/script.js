@@ -3,6 +3,7 @@
 $(function (){
     let materializeElems = {
         modal: $('.modal'),
+        sidenav: $('.sidenav'),
     };
 
     let elements = {
@@ -203,7 +204,7 @@ $(function (){
 
     function displaySelectedGameData(gameData) {
         // console.log('Display Game Data');
-        currentPairData.gameInfo = {
+        let gameInfo = {
             name: gameData.name,
             img: gameData.image.medium_url,
             deck: gameData.deck,
@@ -216,18 +217,24 @@ $(function (){
             }),
         };
 
+        displayGameElem(gameInfo);
+    }
+
+    function displayGameElem(gameData) {
+        currentPairData.gameInfo = gameData;
+
         let gameElem = $(`
             <div class="game-image">
-                <img src="${currentPairData.gameInfo.img}" alt="${currentPairData.gameInfo.name}">
+                <img src="${gameData.img}" alt="${gameData.name}">
             </div>
             <ul class="game-info-list">
-                <li class="info-item game-name">${currentPairData.gameInfo.name}</li>
-                <li class="info-item release-date">Release Date: ${currentPairData.gameInfo.releaseDate}</li>
-                <li class="info-item game-desc">Description: ${currentPairData.gameInfo.deck}</li>
-                <li class="info-item game-genre">Genre: ${currentPairData.gameInfo.genres.reduce((accum, value, index, array) => {
+                <li class="info-item game-name">${gameData.name}</li>
+                <li class="info-item release-date">Release Date: ${gameData.releaseDate}</li>
+                <li class="info-item game-desc">Description: ${gameData.deck}</li>
+                <li class="info-item game-genre">Genre: ${gameData.genres.reduce((accum, value, index, array) => {
                     return accum + (index !== array.length ? ', ' : '') + value;
                 })}</li>
-                <li class="info-item platform-icon">${currentPairData.gameInfo.platforms.reduce((accum, value, index, array) => {
+                <li class="info-item platform-icon">${gameData.platforms.reduce((accum, value, index, array) => {
                     return accum + (index !== array.length ? ', ' : '') + value;
                 })}</li>
             </ul>
@@ -322,47 +329,53 @@ $(function (){
                 previewUrl: item.preview_url,
             };
 
-            let trackPreview = ``;
-
-            if (trackInfo.previewUrl !== null) {
-                trackPreview = `
-                    <div class="track-preview js-track-preview">
-                        <i class="material-icons small">play_circle_outline</i>
-                        <audio src="${trackInfo.previewUrl}">
-                    </div>
-                `;
-            }
-
-            let trackItem = $(`
-                <li class="track-item">
-                    ${trackPreview}
-                    <a href="${trackInfo.link}" target="_blank" rel="external">
-                        <div class="thumb">
-                            <img src="${trackInfo.thumb}" alt="${trackInfo.album}">
-                        </div>
-                        <div class="track-info">
-                            <p class="track-name">${trackInfo.name}</p>
-                            <p class="about-track">
-                                <span class="artists">${trackInfo.artists.reduce((accum, value, index, array) => {
-                                    return accum + (index !== array.length ? ', ' : '') + value;
-                                })}</span>
-                                <span class="album">${trackInfo.album}</span>
-                                <span class="separator">&bull;</span>
-                                <span class="release-year">${trackInfo.releaseYear}</span>
-                            </p>
-                        </div>
-                    </a>
-                </li>
-            `);
-
-            currentPairData.tracksInfo.push(trackInfo);
-
-            elements.tracksList.append(trackItem);
+            displayTrackItem(trackInfo);
         });
 
-        elements.musicResults.on('click', '.js-track-preview', playMusicPreview);
-        elements.musicResults.removeClass('invisible');
         elements.musicShuffle.removeAttr('disabled');
+    }
+
+    function displayTrackItem(trackData) {
+        let trackPreview = ``;
+
+        if (trackData.previewUrl !== null) {
+            trackPreview = `
+                <div class="track-preview js-track-preview">
+                    <i class="material-icons small">play_circle_outline</i>
+                    <audio src="${trackData.previewUrl}">
+                </div>
+            `;
+        }
+
+        let trackItem = $(`
+            <li class="track-item">
+                ${trackPreview}
+                <a href="${trackData.link}" target="_blank" rel="external">
+                    <div class="thumb">
+                        <img src="${trackData.thumb}" alt="${trackData.album}">
+                    </div>
+                    <div class="track-info">
+                        <p class="track-name">${trackData.name}</p>
+                        <p class="about-track">
+                            <span class="artists">${trackData.artists.reduce((accum, value, index, array) => {
+                                return accum + (index !== array.length ? ', ' : '') + value;
+                            })}</span>
+                            <span class="album">${trackData.album}</span>
+                            <span class="separator">&bull;</span>
+                            <span class="release-year">${trackData.releaseYear}</span>
+                        </p>
+                    </div>
+                </a>
+            </li>
+        `);
+
+        if (trackData.previewUrl !== null) {
+            trackItem.on('click', '.js-track-preview', playMusicPreview);
+        }
+
+        currentPairData.tracksInfo.push(trackData);
+
+        elements.tracksList.append(trackItem);
     }
 
     function playMusicPreview(event) {
@@ -445,6 +458,14 @@ $(function (){
         let pairName = eventElem.data('pair-name');
 
         // console.log(savedPairs[pairName]);
+        displayGameElem(savedPairs[pairName].gameInfo);
+
+        elements.tracksList.text('');
+        currentPairData.tracksInfo = [];
+
+        savedPairs[pairName].tracksInfo.forEach(displayTrackItem);
+        elements.musicShuffle.removeAttr('disabled');
+        showResultSection();
     }
 
     /* END Pair Data */
@@ -452,14 +473,15 @@ $(function (){
     function init() {
         console.log('%c Init', 'color: #0455BF;');
 
+        materializeElems.sidenav.sidenav();
+        materializeElems.modal.modal();
+
+        displayPairsList();
+
         elements.searchForm.on('submit', searchGames);
-        // Initialize collapse button
-        $('.sidenav').sidenav();
         elements.musicShuffle.on('click', getMusicData);
         elements.gameShuffle.on('click', showSearchSection);
         elements.saveForm.on('submit', savePairData);
-        materializeElems.modal.modal();
-        displayPairsList();
     }
 
     init();

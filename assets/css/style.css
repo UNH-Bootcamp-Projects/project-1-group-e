@@ -2,11 +2,14 @@
 :root {
     /* Colors */
     --white: #fff;
+    --black: #171717;
     --dark-red: #8C0F31;
     --light-red: #F24141;
     --dark-blue: #0455BF;
     --blue: #0597F2;
     --light-blue: #05AFF2;
+    --grey: #7D7D7D;
+    --yellow: rgb(212, 160, 62);
 
     /* Sizes */
     --max-width: 1440px;
@@ -31,6 +34,58 @@ body {
     from { background-position: 0 0; }
     to { background-position: 100% 0; }
   }
+
+/* Sidenav */
+
+.sidenav-trigger {
+    cursor: pointer;
+}
+
+.sidenav {
+    background-color: var(--grey);
+}
+
+.sidenav-body {
+    padding: 10px;
+}
+
+.sidenav-body .title {
+    font-size: 1rem;
+    margin: 0 0 1rem 0;
+}
+
+.pairs-list {
+    list-style: none;
+    margin: 0;
+}
+
+.pairs-list .pair-item {
+    color: var(--white);
+    background-color: var(--yellow);
+    padding: 0 .5rem;
+    margin: 0 0 2px 0;
+    position: relative;
+    z-index: 1;
+    cursor: pointer;
+}
+
+.pairs-list .pair-item::before {
+    content: '';
+    background-color: transparent;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+.pairs-list .pair-item:hover::before,
+.pairs-list .pair-item:focus::before {
+    background-color: rgba(0, 0, 0, .1);
+}
+
+/* END Sidenav */
 
 .nav-wrapper {
     background: rgb(212, 160, 62)
