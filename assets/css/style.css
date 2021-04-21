@@ -235,7 +235,7 @@ form.search-bar .text-input {
 
 /* ~~~~~ RESULTS PAGE ~~~~~ */
 
-.results-page {
+/* .results-page {
     min-height: 100vh;
     display: flex;
     flex-direction: row;
@@ -362,7 +362,7 @@ form.search-bar .text-input {
     border-radius: .2rem;
     color: var(--blue);
     background-color: var(--white);
-}
+} */
 
 /* MISUC RESULT SECTION */
 
@@ -482,3 +482,61 @@ form.search-bar .text-input {
 .track-item .about-track .release-year {
     opacity: .75;
 }
+
+/* RESULTS PAGE RESTYLING !!!!!!!! */
+
+.game-results-page h2 {
+    font-size: 2rem;
+    color:var(--white);
+}
+
+.result-card {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+
+.info-item {
+    color: var(--white);
+    text-align: left;
+}
+
+.save-wrapper {
+    width: 150px;
+} 
+
+.save-wrapper button {
+    display: block;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.game-info-list {
+    max-width: 50%;
+}
+
+.game-name {
+    font-size: 1.5rem;
+}
+
+.videogame-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.js-genre-name {
+    font-size: 2rem;
+    color: var(--white);
+}
+
+.flex-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+

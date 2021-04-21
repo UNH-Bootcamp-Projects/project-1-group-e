@@ -195,9 +195,9 @@ $(function (){
             </div>
             <ul class="game-info-list">
                 <li class="info-item game-name">${gameInfo.name}</li>
-                <li class="info-item release-date">${gameInfo.releaseDate}</li>
-                <li class="info-item game-desc">${gameInfo.deck}</li>
-                <li class="info-item game-genre">${gameInfo.genres.reduce((accum, value, index) => {
+                <li class="info-item release-date">Release Date: ${gameInfo.releaseDate}</li>
+                <li class="info-item game-desc">Description: ${gameInfo.deck}</li>
+                <li class="info-item game-genre">Genre: ${gameInfo.genres.reduce((accum, value, index) => {
                     return accum + (index !== gameInfo.genres.length ? ', ' : '') + value;
                 })}</li>
                 <li class="info-item platform-icon">${gameInfo.platforms.reduce((accum, value, index) => {
@@ -262,7 +262,7 @@ $(function (){
 
         let genreTitle = elements.musicResults.find('.js-genre-name');
 
-        genreTitle.text(`Playlist genres: ${genres[genreIndex]}`);
+        genreTitle.text(`Genre: ${genres[genreIndex]}`);
 
         console.log(data);
         return data;

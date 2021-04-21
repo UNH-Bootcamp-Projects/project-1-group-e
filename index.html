@@ -61,12 +61,14 @@
         <button class="btn-large hide js-load-more" type="button" disabled>Load More</button>
     </section>
 
+    
+    
+    
     <!--Results Page Section-->
-    <section class="results-page js-result-section hide">
+    <section class="game-results-page js-result-section hide">
         <!--Left Videogame Result Section-->
-        <div class="result-container videogame-container">
-            <h2 class="title">Video Game</h2>
-            <div class="result-card game-result-card js-game-results">
+        <div class="result-container videogame-container container">
+            <div class="row result-card game-result-card js-game-results">
                 <!-- <div class="game-image"></div>
                 <ul class="game-info-list">
                     <li class="info-item game-name">Game Name</li>
@@ -76,28 +78,26 @@
                     <li class="info-item platform-icon">Platform Icon</li>
                 </ul> -->
             </div>
-            <button class="shuffle-btn js-game-shuffle" type="button">
-                <span class="shuffle-text">Shuffle</span>
-                <i class="material-icons small">shuffle</i>
+            <div class="save-wrapper container">
+            <button class="shuffle-btn js-game-shuffle btn w-25" type="button">
+                <span class="shuffle-text">New Game</span>
             </button>
-        </div>
-        <!--Middle Section & Save Button-->
-        <div class="middle-container">
-            <h2 class="title">The Perfect Pair</h2>
-            <h3 class="subtitle">Videogame Name & Playlist Name</h3>
-            <button class="save-btn">Save</button>
+            <button class="save-btn btn w-25">Save</button>
+            </div>
         </div>
         <!--Right Spotify Result Section-->
-        <div class="result-container playlist-container">
-            <h2 class="title">Tracks</h2>
-            <div class="result-card music-result-card invisible js-music-results">
-                <h3 class="card-title js-genre-name"></h3>
-                <ul class="tracks-list js-tracks-list"></ul>
-            </div>
-            <button class="shuffle-btn js-music-shuffle" type="button" disabled>
+        <div class="result-container playlist-container container">
+            <div class="flex-wrapper">
+            <h2 class="title">Listen Below</h2>
+            <button class="shuffle-btn js-music-shuffle btn" type="button" disabled>
                 <span class="shuffle-text">Shuffle</span>
                 <i class="material-icons small">shuffle</i>
             </button>
+            </div>
+            <div class="music-result-card invisible js-music-results">
+                <h3 class="js-genre-name"></h3>
+                <ul class="tracks-list js-tracks-list"></ul>
+            </div>
         </div>
     </section>
 
