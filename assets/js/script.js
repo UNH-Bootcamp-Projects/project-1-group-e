@@ -503,7 +503,16 @@ $(function (){
         elements.musicShuffle.on('click', getMusicData);
         elements.gameShuffle.on('click', showSearchSection);
         elements.saveForm.on('submit', savePairData);
+
+        
+        let homeButton = $(".homeButton");
+
+        homeButton.on("click", showSearchSection);
+
+        console.log(homeButton)
     }
+    
 
     init();
 });
+
