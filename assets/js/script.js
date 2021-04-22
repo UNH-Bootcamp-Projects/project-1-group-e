@@ -16,6 +16,7 @@ $(function (){
         gameResults: $('.js-game-results'),
         gameShuffle: $('.js-game-shuffle'),
         musicResults: $('.js-music-results'),
+        genreName: $('.js-genre-name'),
         musicShuffle: $('.js-music-shuffle'),
         saveForm: $('.js-save-pair-form'),
         tracksList: $('.js-tracks-list'),
@@ -118,6 +119,7 @@ $(function (){
             .then((data) => {
                 // console.log(data);
                 if (data !== undefined) {
+                    console.log(data.results);
                     displayGamesSearchResults(data.results);
 
                     let itemOnPage = data.number_of_page_results;
@@ -156,14 +158,14 @@ $(function (){
                 name: item.name,
                 thumb: item.image.small_url,
                 id: item.guid,
+                releaseYear: dayjs(item.original_release_date, 'YYYY-MM-DD').format('YYYY'),
             };
 
             let gameItem = $(`
                 <li class="game-item">
-                    <div class="game-img">
-                        <img src="${gameInfo.thumb}" alt="${gameInfo.name}">
-                    </div>
-                    <h2 class="game-name">${gameInfo.name}</h2>
+                    <div class="game-img" style="background-image: url(${gameInfo.thumb});"></div>
+                    <h3 class="game-name">${gameInfo.name}</h3>
+                    <span class="release-year">${gameInfo.releaseYear}</span>
                 </li>
             `);
 
@@ -215,7 +217,7 @@ $(function (){
                 return item.name;
             }),
             platforms: gameData.platforms.map((item) => {
-                return item.name;
+                return item.abbreviation;
             }),
         };
 
@@ -229,17 +231,19 @@ $(function (){
             <div class="game-image">
                 <img src="${gameData.img}" alt="${gameData.name}">
             </div>
-            <ul class="game-info-list">
-                <li class="info-item game-name">${gameData.name}</li>
-                <li class="info-item release-date">Release Date: ${gameData.releaseDate}</li>
-                <li class="info-item game-desc">Description: ${gameData.deck}</li>
-                <li class="info-item game-genre">Genre: ${gameData.genres.reduce((accum, value, index, array) => {
-                    return accum + (index !== array.length ? ', ' : '') + value;
-                })}</li>
-                <li class="info-item platform-icon">${gameData.platforms.reduce((accum, value, index, array) => {
-                    return accum + (index !== array.length ? ', ' : '') + value;
-                })}</li>
-            </ul>
+            <div class="game-info">
+                <h2 class="game-name">${gameData.name}</h2>
+                <ul class="info-list">
+                    <li class="info-item game-desc"><span class="label">Description:</span> ${gameData.deck}</li>
+                    <li class="info-item release-date"><span class="label">Release Date:</span> ${gameData.releaseDate}</li>
+                    <li class="info-item game-genre"><span class="label">Genres:</span> ${gameData.genres.reduce((accum, value, index, array) => {
+                        return accum + (index !== array.length ? ', ' : '') + value;
+                    })}</li>
+                    <li class="info-item platform-icon"><span class="label">Platforms:</span> ${gameData.platforms.reduce((accum, value, index, array) => {
+                        return accum + (index !== array.length ? ', ' : '') + value;
+                    })}</li>
+                </ul>
+            </div>
         `);
 
         elements.gameResults.text('').append(gameElem);
@@ -293,9 +297,7 @@ $(function (){
 
         let data = await result.json();
 
-        let genreTitle = elements.musicResults.find('.js-genre-name');
-
-        genreTitle.text(`Genre: ${genres[genreIndex]}`);
+        elements.genreName.text(genres[genreIndex]);
 
         // console.log(data);
         return data;
@@ -365,8 +367,8 @@ $(function (){
             let trackPreviewBtn = $(`
                 <button class="track-preview-btn btn-flat js-preview-audio">
                     <audio src="${trackData.previewUrl}"></audio>
-                    <i class="play-icon material-icons small">play_circle_outline</i>
-                    <i class="pause-icon material-icons small">pause_circle_outline</i>
+                    <i class="play-icon material-icons">play_circle_outline</i>
+                    <i class="pause-icon material-icons">pause_circle_outline</i>
                 </button>
             `);
 
@@ -489,7 +491,9 @@ $(function (){
     function init() {
         console.log('%c Init', 'color: #0455BF;');
 
-        materializeElems.sidenav.sidenav();
+        materializeElems.sidenav.sidenav({
+            edge: 'right',
+        });
         materializeElems.modal.modal();
 
         displayPairsList();

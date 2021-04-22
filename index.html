@@ -1,137 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GamePulse</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Materialize -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <!-- Materialize Icons-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Google Fonts Links -->
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Dosis&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&family=Zen+Dots&display=swap" rel="stylesheet">
     <!-- Custom -->
     <link rel="stylesheet" href="./assets/css/style.css">
-
 </head>
-
 <body>
+    <div class="navbar-fixed">
+        <nav class="navbar">
+            <div class="nav-wrapper">
+                <a href="#" class="gamer-art">
+                    <img src="./assets/images/Gamer-Clipart.png" alt="gamer-clipart">
+                </a>
+                <ul class="nav-list">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a class="sidenav-trigger" data-target="sidenav"><i class="material-icons">save</i></a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
-    <nav>
-        <div class="nav-wrapper">
-          <a href="#" class="left gamer-art"> 
-            <img src="./assets/images/Gamer-Clipart.png" alt="gamer-clipart">
-        </a>
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
-            <li><a href="sass.html">Home</a></li>
-            <li><a href="badges.html">Previous Pairings</a></li>
-            <li><a href="collapsible.html">About Us</a></li>
-          </ul>
+    <section id="sidenav" class="sidenav">
+        <div class="user-view">
+            <div class="background"><video width="640" height="360" playsinline autoplay muted loop><source src="https://media.tenor.com/videos/a77b2030256d50469e355b21fbb5183d/mp4" type="video/mp4"><source src="https://media.tenor.com/videos/81e4b6458cf1eb6df1b0af0bf720788e/webm" type="video/webm"></video></div>
+            <img class="circle" src="./assets/images/Gamer-Clipart.png" alt="gamer-clipart">
+            <span class="white-text name">GamePulse</span>
         </div>
-      </nav>
+        <div class="sidenav-body">
+            <h2 class="title">Recently Saved Pairings:</h2>
+            <ul class="pairs-list js-pairs-list"></ul>
+        </div>
+    </section>
 
-    <section class="side-nav-bar">
-        <div id="sidenav" class="sidenav">
-            <div class="user-view">
-                <div class="background">
-                    <div class="tenor-gif-embed" data-postid="3535566" data-share-method="host" data-width="100%" data-aspect-ratio="1.775"><a href="https://tenor.com/view/sound-wave-wave-sound-gif-3535566">Yas GIF</a> from <a href="https://tenor.com/search/soundwave-gifs">Soundwave GIFs</a></div><script type="text/javascript" async src="https://tenor.com/embed.js"></script>
+    <div class="content-wrapper">
+        <!-- Search Section -->
+        <section class="search-section js-search-section">
+            <h1 class="site-title center">GamePulse</h1>
+            <p class="mission center">Play Video Games. Discover New Music. Jam Out.</p>
+
+            <form class="js-search-form" action="">
+                <div class="search-input-wrap">
+                    <input class="browser-default text-input search-input" type="search" placeholder="Type in a Video Game..." name="search" required>
                 </div>
-                <a href="#user"><img class="circle" src="./assets/images/Gamer-Clipart.png"></a>
-                <a href="#name"><span class="white-text name">GamePulse</span></a>
-            </div>
-            <div class="sidenav-body">
-                <h2 class="title">Recently Saved Pairings:</h2>
-                <ul class="pairs-list js-pairs-list"></ul>
-            </div>
-        </div>
-        <span class="sidenav-trigger" data-target="sidenav"><i class="material-icons save-icon">save</i></span>
-    </section>
+            </form>
+        </section>
 
-    <!--Homepage Search Section-->
-    <section class="home-page js-search-section">
-        
-
-        <h2 class="site-title">GamePulse</h2>
-        <p class="mission">Play Video Games. Discover New Music. Jam Out.</p>
-
-        <form class="search-bar js-search-form" action="">
-            <input class="text-input" type="search" placeholder="Type in a Video Game..." name="search">
-        </form>
-    </section>
-
-    <!-- Games Search Results Section -->
-    <section class="games-page js-games-section hide">
-        <h2 class="page-title">Game Pulse</h2>
-        <h3 class="subtitle">Pick a Game</h3>
-
-        <ul class="game-list js-games-list"></ul>
-        <button class="btn-large hide js-load-more" type="button" disabled>Load More</button>
-    </section>
-
-    
-    
-    
-    <!--Results Page Section-->
-    <section class="game-results-page js-result-section hide">
-        <!--Left Videogame Result Section-->
-        <div class="result-container videogame-container container">
-            <div class="row result-card game-result-card js-game-results">
-                <!-- <div class="game-image"></div>
-                <ul class="game-info-list">
-                    <li class="info-item game-name">Game Name</li>
-                    <li class="info-item game-rating">9.5 Rating</li>
-                    <li class="info-item release-date">Release Date</li>
-                    <li class="info-item game-genre">Genre</li>
-                    <li class="info-item platform-icon">Platform Icon</li>
-                </ul> -->
+        <!-- Games Search Results Section -->
+        <section class="games-section js-games-section hide">
+            <h2 class="title center">Searched Games</h2>
+            <h3 class="subtitle">Pick a Game</h3>
+            <ul class="games-list js-games-list"></ul>
+            <div class="center">
+                <button class="btn-large hide js-load-more" type="button" disabled>Load More</button>
             </div>
-            <div class="save-wrapper container">
-            <button class="shuffle-btn js-game-shuffle btn w-25" type="button">
-                <span class="shuffle-text">New Game</span>
-            </button>
-            <button class="save-btn btn w-25 modal-trigger" data-target="save-pair-modal">Save</button>
+        </section>
+
+        <!-- Results Page Section -->
+        <section class="result-section js-result-section hide">
+            <div class="videogame-container">
+                <div class="game-result-card js-game-results"></div>
+                <div class="btn-container">
+                    <button class="btn js-game-shuffle" type="button">Change Game</button>
+                    <button class="btn modal-trigger" data-target="save-pair-modal">Save Pairing</button>
+                </div>
             </div>
-        </div>
-        <!--Right Spotify Result Section-->
-        <div class="result-container playlist-container container">
-            <div class="flex-wrapper">
-            <h2 class="title">Listen Below</h2>
-            <button class="shuffle-btn js-music-shuffle btn" type="button" disabled>
-                <span class="shuffle-text">Shuffle</span>
-                <i class="material-icons small">shuffle</i>
-            </button>
+
+            <div class="playlist-container">
+                <div class="toolbar">
+                    <h3 class="title">Music Genres: <span class="js-genre-name"></span></h3>
+                    <button class="btn-large shuffle-btn js-music-shuffle" type="button" disabled>Shuffle <i class="material-icons">shuffle</i></button>
+                </div>
+                <div class="music-result-card js-music-results">
+                    <ul class="tracks-list js-tracks-list"></ul>
+                </div>
             </div>
-            <div class="music-result-card js-music-results">
-                <h3 class="js-genre-name"></h3>
-                <ul class="tracks-list js-tracks-list"></ul>
-            </div>
-        </div>
-    </section>
+        </section>
+    </div>
 
     <div id="save-pair-modal" class="modal">
         <form class="js-save-pair-form">
             <div class="modal-content">
                 <h4>Save Pair</h4>
-                <input class="text-input js-pair-name" type="text" placeholder="Enter Pair name" name="pair-name" required>
+                <input class="browser-default text-input js-pair-name" type="text" placeholder="Enter Pair name" name="pair-name" required>
             </div>
             <div class="modal-footer">
-                <button class="modal-close btn" type="button">Cancel</button>
+                <button class="btn modal-close" type="button">Cancel</button>
                 <button class="btn" type="submit">Submit</button>
             </div>
         </form>
     </div>
-
-    <!-- <div class="footer">
-        <p>Created By: | &#169; 2021 </p>
-      
-    <div>Icons made by <a href="" title="monkik">monkik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
-    </div> -->
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
