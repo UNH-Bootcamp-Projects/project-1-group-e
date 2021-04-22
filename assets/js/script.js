@@ -323,10 +323,11 @@ $(function (){
         console.log(musicData);
 
         musicData.forEach((item) => {
+            console.log(item.album.release_date);
             let trackInfo = {
                 album: item.album.name,
                 thumb: item.album.images[2].url,
-                releaseYear: dayjs(item.release_date, 'YYYY-MM-DD').format('YYYY'),
+                releaseYear: dayjs(item.album.release_date, 'YYYY-MM-DD').format('YYYY'),
                 artists: item.artists.map((item) => {
                     return item.name;
                 }),

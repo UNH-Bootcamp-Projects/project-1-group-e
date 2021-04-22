@@ -558,8 +558,7 @@ nav a.sidenav-trigger i {
     transition: color .3s;
 }
 
-.track-item .track-preview-btn:hover,
-.track-item .track-preview-btn:focus {
+.track-item .track-preview-btn:hover {
     color: var(--yellow);
     background-color: transparent;
 }
