@@ -57,12 +57,14 @@ $(function (){
     }
 
     function showSearchSection() {
+        stopPlaying();
         hideSection(elements.gamesSection);
         hideSection(elements.resultSection);
         showSection(elements.searchSection);
     }
 
     function showGamesSection() {
+        stopPlaying();
         hideSection(elements.searchSection);
         hideSection(elements.resultSection);
         showSection(elements.gamesSection);
@@ -304,6 +306,8 @@ $(function (){
             elements.musicShuffle.attr('disabled', true);
         }
 
+        stopPlaying();
+
         getMusicRecommendationByGenre()
             .then((data) => {
                 // console.log(data.tracks);
@@ -336,20 +340,8 @@ $(function (){
     }
 
     function displayTrackItem(trackData) {
-        let trackPreview = ``;
-
-        if (trackData.previewUrl !== null) {
-            trackPreview = `
-                <div class="track-preview js-track-preview">
-                    <i class="material-icons small">play_circle_outline</i>
-                    <audio src="${trackData.previewUrl}">
-                </div>
-            `;
-        }
-
         let trackItem = $(`
             <li class="track-item">
-                ${trackPreview}
                 <a href="${trackData.link}" target="_blank" rel="external">
                     <div class="thumb">
                         <img src="${trackData.thumb}" alt="${trackData.album}">
@@ -370,7 +362,17 @@ $(function (){
         `);
 
         if (trackData.previewUrl !== null) {
-            trackItem.on('click', '.js-track-preview', playMusicPreview);
+            let trackPreviewBtn = $(`
+                <button class="track-preview-btn btn-flat js-preview-audio">
+                    <audio src="${trackData.previewUrl}"></audio>
+                    <i class="play-icon material-icons small">play_circle_outline</i>
+                    <i class="pause-icon material-icons small">pause_circle_outline</i>
+                </button>
+            `);
+
+            trackPreviewBtn.on('click', playMusicPreview);
+
+            trackItem.prepend(trackPreviewBtn);
         }
 
         currentPairData.tracksInfo.push(trackData);
@@ -381,16 +383,30 @@ $(function (){
     function playMusicPreview(event) {
         event.stopPropagation();
         let eventElem = $(event.currentTarget);
-        let icon = eventElem.find('.material-icons');
         let audio = eventElem.find('audio')[0];
 
         if (audio.paused == false) {
             audio.pause();
-            icon.text('play_circle_outline');
+            eventElem.removeClass('playing');
         } else {
-            audio.volume = 0.2;
+            stopPlaying();
+            audio.volume = 0.1;
             audio.play();
-            icon.text('pause_circle_outline');
+            eventElem.addClass('playing');
+        }
+    }
+
+    function stopPlaying() {
+        let audioPreview = $('.js-preview-audio.playing');
+
+        if (audioPreview.length > 0) {
+            audioPreview.each(function () {
+                let elem = $(this);
+                let audio = elem.find('audio')[0];
+
+                elem.removeClass('playing');
+                audio.pause();
+            });
         }
     }
 
