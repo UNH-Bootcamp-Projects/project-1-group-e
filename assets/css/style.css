@@ -453,6 +453,7 @@ nav a.sidenav-trigger i {
     --btn-cont-width: 160px;
     --game-img-width: 300px;
     display: flex;
+    align-items: flex-start;
     flex-wrap: wrap;
     color: var(--white);
     box-shadow: var(--box-shadow);
