@@ -445,7 +445,7 @@ form.search-bar .text-input {
     border-bottom: none;
 }
 
-.track-item .track-preview {
+.track-item .track-preview-btn {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -453,6 +453,7 @@ form.search-bar .text-input {
     text-shadow: 0 0 .2rem rgba(0, 0, 0, .5);
     width: var(--track-thumb-size);
     height: var(--track-thumb-size);
+    padding: 0;
     position: absolute;
     top: var(--track-item-top-indent);
     left: var(--track-item-left-indent);
@@ -460,7 +461,7 @@ form.search-bar .text-input {
     cursor: pointer;
 }
 
-.track-item .track-preview::before {
+.track-item .track-preview-btn::before {
     content: '';
     background-color: transparent;
     width: 100%;
@@ -471,14 +472,20 @@ form.search-bar .text-input {
     left: 0;
 }
 
-.track-item .track-preview:hover::before,
-.track-item .track-preview:focus::before {
+.track-item .track-preview-btn:hover::before,
+.track-item .track-preview-btn:focus::before {
     background-color: var(--light-red);
 }
 
-.track-item .track-preview i {
+.track-item .track-preview-btn i {
+    font-size: 2rem;
     position: relative;
     z-index: 2;
+}
+
+.track-item .track-preview-btn.playing .play-icon,
+.track-item .track-preview-btn:not(.playing) .pause-icon {
+    display: none;
 }
 
 .track-item > a {
