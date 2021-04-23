@@ -8,12 +8,8 @@
     --light-grey: #ccc;
     --yellow: rgb(212, 160, 62);
     --light-yellow: rgb(251 189 73);
-
     --dark-red: #8C0F31;
     --light-red: #F24141;
-    --dark-blue: #0455BF;
-    --blue: #0597F2;
-    --light-blue: #05AFF2;
 
     /* Fonts */
     --zen-dots-font: 'Zen Dots', cursive;
@@ -22,6 +18,7 @@
     /* Sizes */
     --max-width: 1440px;
     --header-height: 64px;
+    --body-bg-width: 1962px;
 
     /* Other */
     --white-text-shadow: 0 0 .2em rgba(0, 0, 0, .5);
@@ -46,11 +43,11 @@ body {
     font-family: var(--zen-dots-font);
     background-color: var(--grey);
     background-image: url(../images/Sound-Background.png);
-    background-size: auto;
-    background-repeat: no-repeat;
+    background-size: var(--body-bg-width) auto;
+    background-repeat: repeat-x;
     background-attachment: fixed;
     min-height: 100%;
-    animation: animatedBackground 40s linear infinite;
+    animation: animatedBackground 60s linear infinite;
 }
 
 /* END Basic Styles */
@@ -120,25 +117,7 @@ body {
         background-position: 0 0;
     }
     to {
-        background-position: 100% 0;
-    }
-}
-
-@keyframes cycle-colors {
-    0% {
-        border-color: var(--dark-red);
-    }
-    25% {
-        border-color: var(--dark-blue);
-    }
-    50% {
-        border-color: var(--light-blue);
-    }
-    75% {
-        border-color: var(--light-red);
-    }
-    100% {
-        border-color: var(--blue);
+        background-position: calc(var(--body-bg-width) * -2) 0;
     }
 }
 
@@ -202,8 +181,7 @@ nav a.sidenav-trigger i {
 
 .gamer-art:hover::before,
 .gamer-art:hover::after {
-    animation: pulse 0.5s linear infinite,
-        cycle-colors 6s linear infinite;
+    animation: pulse 0.5s linear infinite;
 }
 
 .gamer-art img {
@@ -739,41 +717,21 @@ nav a.sidenav-trigger i {
 
 /* About us Section */
 
-.about-us-section {
-    height: 100vh;
-    background-color: rgb(230, 230, 230);
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: var(--black);
-}
-
-.about-title {
+.about-us-modal .about-title {
     font-size: 2rem;
     color: var(--yellow);
-    margin-bottom: 0em;
+    margin-bottom: 0;
     text-align: center;
 }
 
-.about-text {
-    text-align: center;
-    font-family: var(--dosis-font);
-    font-size: 1.2rem;
-}
-
-.about-list {
+.about-us-modal .about-text {
     text-align: center;
     font-family: var(--dosis-font);
     font-size: 1.2rem;
 }
 
-.bold-about {
+.about-us-modal .bold-about {
     font-weight: 700;
 }
 
-.m-small {
-    padding: 0em;
-}
-
-
+/* END About us Section */
