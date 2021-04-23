@@ -23,7 +23,7 @@
                 </a>
                 <ul class="nav-list">
                     <li><a class="homeButton js-homeButton">Home</a></li>
-                    <li><a href="#">About Us</a></li>
+                    <li><a class="about-us js-about-button modal-trigger" data-target="about-modal" href="#">About Us</a></li>
                     <li><a class="sidenav-trigger" data-target="sidenav"><i class="material-icons">save</i></a></li>
                 </ul>
             </div>
@@ -87,6 +87,27 @@
         </section>
     </div>
 
+    <!--About Us Section-->
+    <section class="modal" id="about-modal">
+        <div class="modal-footer m-small">
+            <i class="small material-icons modal-close">close</i>
+        </div>
+        <div class="modal-content m-body">
+            <h3 class="about-title"><span class="bold-about">Made By Gamers</span> (Except For Swetha) | <span class="bold-about">For Gamers</span></h3>
+            <p class="about-text">Game developers put a lot of time into creating original game soundtracks, but sometimes you want to enjoy new music while gaming. Whether you're killing stormcloaks in Dragonsreach or camping in the corners Verdansk... we've got a soundtrack for you.</p>
+             <h3 class="about-title">Simple & Fun</h3>
+            <p class="about-text">Choose the game you want to play. Find new music to go with it. Click the save button to store your selection. Or... Find new games in our library of endless titles.</p>
+            <h3 class="about-title">Coming Soon</h3>
+            <ul>
+                <li class="about-list">Create a playlist on your own Spotify</li>
+                <li class="about-list">Dive deeper into your favorite music genres</li>
+                <li class="about-list">Filter game results by release date, maturity, platform & more</li>
+                <li class="about-list">Share your pairing with friends</li>
+            </ul>
+    </div>
+        
+    </section>
+    <!--End about us section-->
     <div id="save-pair-modal" class="modal">
         <form class="js-save-pair-form">
             <div class="modal-content">

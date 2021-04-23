@@ -725,3 +725,44 @@ nav a.sidenav-trigger i {
 }
 
 /* END Result Section */
+
+/* About us Section */
+
+.about-us-section {
+    height: 100vh;
+    background-color: rgb(230, 230, 230);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--black);
+}
+
+.about-title {
+    font-size: 2rem;
+    color: var(--yellow);
+    margin-bottom: 0em;
+    text-align: center;
+}
+
+.about-text {
+    text-align: center;
+    font-family: var(--dosis-font);
+    font-size: 1.2rem;
+}
+
+.about-list {
+    text-align: center;
+    font-family: var(--dosis-font);
+    font-size: 1.2rem;
+}
+
+.bold-about {
+    font-weight: 700;
+}
+
+.m-small {
+    padding: 0em;
+}
+
+
