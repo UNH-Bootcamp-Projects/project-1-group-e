@@ -22,6 +22,7 @@ $(function (){
         tracksList: $('.js-tracks-list'),
         pairsList: $('.js-pairs-list'),
         homeLink: $('.js-home-link'),
+        noResultsMsg: $('.js-noresults-message'),
     }
 
     let gameApiData = {
@@ -46,36 +47,36 @@ $(function (){
         return Math.floor(Math.random() * Math.floor(max));
     }
 
-    function hideSection(section) {
-        if (!section.hasClass('hide')) {
-            section.addClass('hide');
+    function hideElem(elem) {
+        if (!elem.hasClass('hide')) {
+            elem.addClass('hide');
         }
     }
 
-    function showSection(section) {
-        if (section.hasClass('hide')) {
-            section.removeClass('hide');
+    function showElem(elem) {
+        if (elem.hasClass('hide')) {
+            elem.removeClass('hide');
         }
     }
 
     function showSearchSection() {
         stopPlaying();
-        hideSection(elements.gamesSection);
-        hideSection(elements.resultSection);
-        showSection(elements.searchSection);
+        hideElem(elements.gamesSection);
+        hideElem(elements.resultSection);
+        showElem(elements.searchSection);
     }
 
     function showGamesSection() {
         stopPlaying();
-        hideSection(elements.searchSection);
-        hideSection(elements.resultSection);
-        showSection(elements.gamesSection);
+        hideElem(elements.searchSection);
+        hideElem(elements.resultSection);
+        showElem(elements.gamesSection);
     }
 
     function showResultSection() {
-        hideSection(elements.searchSection);
-        hideSection(elements.gamesSection);
-        showSection(elements.resultSection);
+        hideElem(elements.searchSection);
+        hideElem(elements.gamesSection);
+        showElem(elements.resultSection);
     }
 
     /* Game Search */
@@ -98,8 +99,13 @@ $(function (){
         let limit = 12;
 
         if (isForm) {
+            let searchInput = eventElem.find('input[type="search"]');
+
             elements.gamesList.text('');
-            searchQuery = eventElem.find('input[type="search"]').val().trim();
+            searchQuery = searchInput.val().trim();
+            searchInput.one('keydown', () => {
+                hideElem(elements.noResultsMsg);
+            });
         }
 
         if (isLoadMore) {
@@ -134,6 +140,10 @@ $(function (){
                             .on('click.loadMore', loadMoreResults);
                     } else {
                         elements.showMoreBtn.addClass('hide');
+                    }
+                } else {
+                    if (isForm) {
+                        showElem(elements.noResultsMsg);
                     }
                 }
             });
