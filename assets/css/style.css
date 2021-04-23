@@ -8,12 +8,8 @@
     --light-grey: #ccc;
     --yellow: rgb(212, 160, 62);
     --light-yellow: rgb(251 189 73);
-
     --dark-red: #8C0F31;
     --light-red: #F24141;
-    --dark-blue: #0455BF;
-    --blue: #0597F2;
-    --light-blue: #05AFF2;
 
     /* Fonts */
     --zen-dots-font: 'Zen Dots', cursive;
@@ -124,24 +120,6 @@ body {
     }
 }
 
-@keyframes cycle-colors {
-    0% {
-        border-color: var(--dark-red);
-    }
-    25% {
-        border-color: var(--dark-blue);
-    }
-    50% {
-        border-color: var(--light-blue);
-    }
-    75% {
-        border-color: var(--light-red);
-    }
-    100% {
-        border-color: var(--blue);
-    }
-}
-
 @keyframes pulse {
     to {
         opacity: 1;
@@ -202,8 +180,7 @@ nav a.sidenav-trigger i {
 
 .gamer-art:hover::before,
 .gamer-art:hover::after {
-    animation: pulse 0.5s linear infinite,
-        cycle-colors 6s linear infinite;
+    animation: pulse 0.5s linear infinite;
 }
 
 .gamer-art img {
