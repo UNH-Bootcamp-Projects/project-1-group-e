@@ -18,6 +18,7 @@
     /* Sizes */
     --max-width: 1440px;
     --header-height: 64px;
+    --body-bg-width: 1962px;
 
     /* Other */
     --white-text-shadow: 0 0 .2em rgba(0, 0, 0, .5);
@@ -42,11 +43,11 @@ body {
     font-family: var(--zen-dots-font);
     background-color: var(--grey);
     background-image: url(../images/Sound-Background.png);
-    background-size: auto;
-    background-repeat: no-repeat;
+    background-size: var(--body-bg-width) auto;
+    background-repeat: repeat-x;
     background-attachment: fixed;
     min-height: 100%;
-    animation: animatedBackground 40s linear infinite;
+    animation: animatedBackground 60s linear infinite;
 }
 
 /* END Basic Styles */
@@ -116,7 +117,7 @@ body {
         background-position: 0 0;
     }
     to {
-        background-position: 100% 0;
+        background-position: calc(var(--body-bg-width) * -2) 0;
     }
 }
 
