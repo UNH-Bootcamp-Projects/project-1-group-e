@@ -14,7 +14,7 @@ $(function (){
         gamesList: $('.js-games-list'),
         showMoreBtn: $('.js-load-more'),
         gameResults: $('.js-game-results'),
-        gameShuffle: $('.js-game-shuffle'),
+        startOver: $('.js-start-over'),
         musicResults: $('.js-music-results'),
         genreName: $('.js-genre-name'),
         musicShuffle: $('.js-music-shuffle'),
@@ -103,9 +103,11 @@ $(function (){
 
             elements.gamesList.text('');
             searchQuery = searchInput.val().trim();
-            searchInput.one('keydown', () => {
-                hideElem(elements.noResultsMsg);
-            });
+            searchInput
+                .val('')
+                .one('keydown', () => {
+                    hideElem(elements.noResultsMsg);
+                });
         }
 
         if (isLoadMore) {
@@ -272,9 +274,7 @@ $(function (){
         return data.access_token;
     }
 
-    async function getMusicGenres() {
-        let token = await getMusicApiToken();
-
+    async function getMusicGenres(token) {
         let result = await fetch('https://api.spotify.com/v1/recommendations/available-genre-seeds', {
             method: 'GET',
             headers: { 'Authorization' : 'Bearer ' + token},
@@ -287,7 +287,7 @@ $(function (){
 
     async function getMusicRecommendationByGenre() {
         let token = await getMusicApiToken();
-        let genres = await getMusicGenres().then((data) => {
+        let genres = await getMusicGenres(token).then((data) => {
             return data.genres;
         });
         let limit = 10;
@@ -302,6 +302,7 @@ $(function (){
         let data = await result.json();
 
         elements.genreName.text(genres[genreIndex]);
+        showElem(elements.genreName);
         currentPairData.musicGenre = genres[genreIndex];
 
         return data;
@@ -312,6 +313,7 @@ $(function (){
             elements.musicShuffle.attr('disabled', true);
         }
 
+        hideElem(elements.genreName);
         stopPlaying();
         elements.tracksList.text('');
 
@@ -330,7 +332,7 @@ $(function (){
         musicData.forEach((item) => {
             let trackInfo = {
                 album: item.album.name,
-                thumb: item.album.images[2].url,
+                thumb: item.album.images[2] ? item.album.images[2].url : '',
                 releaseYear: item.album.release_date ? dayjs(item.album.release_date, 'YYYY-MM-DD').format('YYYY') : '',
                 artists: item.artists.map((item) => {
                     return item.name;
@@ -395,11 +397,13 @@ $(function (){
         if (audio.paused == false) {
             audio.pause();
             eventElem.removeClass('playing');
+            $(audio).off('ended.musicPreview');
         } else {
             stopPlaying();
             audio.volume = 0.1;
             audio.play();
             eventElem.addClass('playing');
+            $(audio).one('ended.musicPreview', stopPlaying);
         }
     }
 
@@ -496,9 +500,8 @@ $(function (){
 
         elements.searchForm.on('submit', searchGames);
         elements.musicShuffle.on('click', getMusicData);
-        elements.gameShuffle.on('click', showSearchSection);
+        elements.startOver.on('click', showSearchSection);
         elements.saveForm.on('submit', savePairData);
-
         elements.homeLink.on("click", showSearchSection);
     }
 

@@ -71,7 +71,7 @@
             <div class="videogame-container">
                 <div class="game-result-card js-game-results"></div>
                 <div class="btn-container">
-                    <button class="btn js-game-shuffle" type="button">Start Over</button>
+                    <button class="btn js-start-over" type="button">Start Over</button>
                     <button class="btn modal-trigger" data-target="save-pair-modal">Save Pairing</button>
                 </div>
             </div>
@@ -89,24 +89,24 @@
     </div>
 
     <!--About Us Section-->
-    <section class="modal" id="about-modal">
+    <section class="modal about-us-modal" id="about-modal">
         <div class="modal-footer m-small">
             <i class="small material-icons modal-close">close</i>
         </div>
         <div class="modal-content m-body">
             <h3 class="about-title"><span class="bold-about">Made By Gamers</span> (Except For Swetha) | <span class="bold-about">For Gamers</span></h3>
             <p class="about-text">Game developers put a lot of time into creating original game soundtracks, but sometimes you want to enjoy new music while gaming. Whether you're killing stormcloaks in Dragonsreach or camping in the corners Verdansk... we've got a soundtrack for you.</p>
-             <h3 class="about-title">Simple & Fun</h3>
+
+            <h3 class="about-title">Simple & Fun</h3>
             <p class="about-text">Choose the game you want to play. Find new music to go with it. Click the save button to store your selection. Or... Find new games in our library of endless titles.</p>
+
             <h3 class="about-title">Coming Soon</h3>
-            <ul>
-                <li class="about-list">More to come....</li>
-            </ul>
-    </div>
-        
+            <p class="about-text">More to come....</p>
+        </div>
     </section>
     <!--End about us section-->
-    <div id="save-pair-modal" class="modal">
+
+    <section id="save-pair-modal" class="modal">
         <form class="js-save-pair-form">
             <div class="modal-content">
                 <h4>Save Pairing</h4>
@@ -117,7 +117,7 @@
                 <button class="btn" type="submit">Submit</button>
             </div>
         </form>
-    </div>
+    </section>
 
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"
