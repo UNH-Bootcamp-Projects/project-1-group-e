@@ -19,7 +19,9 @@ Given a Game Pulse project with form inputs
 
 3. When clicked on a thumbnail of a game, then results page is displayed with:
     
-    3.1 Results page, **Video Game Card** :
+    3.1 Results page, 
+    
+    **Video Game Card** :
              Game name.
              Rating.
              Release date.
@@ -28,7 +30,9 @@ Given a Game Pulse project with form inputs
             Spotify playlist Genres.
 
     3.3 Shuffle button for playlist.
+
     3.4 Save Pairing button to save to local storage.
+
     3.5 Reshuffle to just reshuffle music.
 
 ## Technologies
