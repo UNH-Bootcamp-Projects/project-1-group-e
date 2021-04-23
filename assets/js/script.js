@@ -21,6 +21,7 @@ $(function (){
         saveForm: $('.js-save-pair-form'),
         tracksList: $('.js-tracks-list'),
         pairsList: $('.js-pairs-list'),
+        homeLink: $('.js-home-link'),
     }
 
     let gameApiData = {
@@ -36,12 +37,11 @@ $(function (){
     let savedPairs = JSON.parse(localStorage.getItem('savedPairs')) || {};
 
     let currentPairData = {
-        gameInfo: undefined,
-        tracksInfo: undefined,
+        gameInfo: {},
+        tracksInfo: [],
     };
 
     function getRandomInt(max) {
-        // return random integer from 0 to 'max'
         return Math.floor(Math.random() * Math.floor(max));
     }
 
@@ -86,7 +86,6 @@ $(function (){
     }
 
     function searchGames(event) {
-        // console.log('%c Search Games ', 'color: #05AFF2;');
         event.preventDefault();
 
         let eventElem = $(event.currentTarget);
@@ -111,15 +110,13 @@ $(function (){
 
         proxyFetch(requestUrl)
             .then((response) => {
-                // console.log(response);
                 if (response.ok){
                     return response.json();
                 }
             })
             .then((data) => {
-                // console.log(data);
-                if (data !== undefined) {
-                    console.log(data.results);
+                if (data !== undefined
+                && data.results.length > 0) {
                     displayGamesSearchResults(data.results);
 
                     let itemOnPage = data.number_of_page_results;
@@ -142,7 +139,6 @@ $(function (){
     }
 
     function loadMoreResults(event) {
-        // console.log('%c Load More Results ', 'color: #05AFF2;');
         $(event.currentTarget)
             .attr('disabled', true)
             .off('click.loadMore');
@@ -151,14 +147,12 @@ $(function (){
     }
 
     function displayGamesSearchResults(searchedData) {
-        // console.log('%c Display Game Search Results ', 'color: #F24141;');
-
         searchedData.forEach((item) => {
             let gameInfo = {
                 name: item.name,
                 thumb: item.image.small_url,
                 id: item.guid,
-                releaseYear: dayjs(item.original_release_date, 'YYYY-MM-DD').format('YYYY'),
+                releaseYear: item.original_release_date ? dayjs(item.original_release_date, 'YYYY-MM-DD').format('YYYY') : '',
             };
 
             let gameItem = $(`
@@ -184,7 +178,6 @@ $(function (){
     /* Game Data */
 
     function selectGame(event) {
-        // console.log('Select Game');
         let eventElem = $(event.currentTarget);
         let gameId = eventElem.data('game-id');
 
@@ -198,21 +191,21 @@ $(function (){
                     }
                 })
                 .then((data) => {
-                    // console.log(data);
-                    getMusicData();
-                    displaySelectedGameData(data.results);
-                    showResultSection();
+                    if (data !== undefined) {
+                        getMusicData();
+                        displaySelectedGameData(data.results);
+                        showResultSection();
+                    }
                 });
         }
     }
 
     function displaySelectedGameData(gameData) {
-        // console.log('Display Game Data');
         let gameInfo = {
             name: gameData.name,
             img: gameData.image.medium_url,
             deck: gameData.deck,
-            releaseDate: dayjs(gameData.original_release_date, 'YYYY-MM-DD').format('D MMM YYYY'),
+            releaseDate: gameData.original_release_date ? dayjs(gameData.original_release_date, 'YYYY-MM-DD').format('D MMM YYYY') : '',
             genres: gameData.genres.map((item) => {
                 return item.name;
             }),
@@ -235,7 +228,7 @@ $(function (){
                 <h2 class="game-name">${gameData.name}</h2>
                 <ul class="info-list">
                     <li class="info-item game-desc"><span class="label">Description:</span> ${gameData.deck}</li>
-                    <li class="info-item release-date"><span class="label">Release Date:</span> ${gameData.releaseDate}</li>
+                    ${gameData.releaseDate !== '' ? `<li class="info-item release-date"><span class="label">Release Date:</span> ${gameData.releaseDate}</li>` : ``}
                     <li class="info-item game-genre"><span class="label">Genres:</span> ${gameData.genres.reduce((accum, value, index, array) => {
                         return accum + (index !== array.length ? ', ' : '') + value;
                     })}</li>
@@ -258,9 +251,9 @@ $(function (){
             method: 'POST',
             headers: {
                 'Content-Type' : 'application/x-www-form-urlencoded', 
-                'Authorization' : 'Basic ' + btoa(musicApiData.clientId + ':' + musicApiData.clientSecret)
+                'Authorization' : 'Basic ' + btoa(musicApiData.clientId + ':' + musicApiData.clientSecret),
             },
-            body: 'grant_type=client_credentials'
+            body: 'grant_type=client_credentials',
         });
 
         let data = await result.json();
@@ -273,7 +266,7 @@ $(function (){
 
         let result = await fetch('https://api.spotify.com/v1/recommendations/available-genre-seeds', {
             method: 'GET',
-            headers: { 'Authorization' : 'Bearer ' + token}
+            headers: { 'Authorization' : 'Bearer ' + token},
         });
 
         let data = await result.json();
@@ -292,14 +285,13 @@ $(function (){
 
         let result = await fetch(`https://api.spotify.com/v1/recommendations?seed_genres=${genres[genreIndex]}&limit=${limit}`, {
             method: 'GET',
-            headers: { 'Authorization' : 'Bearer ' + token}
+            headers: { 'Authorization' : 'Bearer ' + token},
         });
 
         let data = await result.json();
 
         elements.genreName.text(genres[genreIndex]);
 
-        // console.log(data);
         return data;
     }
 
@@ -309,25 +301,25 @@ $(function (){
         }
 
         stopPlaying();
+        elements.tracksList.text('');
 
         getMusicRecommendationByGenre()
             .then((data) => {
-                // console.log(data.tracks);
-                displayMusicData(data.tracks);
+                if (data !== undefined
+                && data.tracks.length > 0) {
+                    displayMusicData(data.tracks);
+                }
             });
     }
 
     function displayMusicData(musicData) {
-        elements.tracksList.text('');
         currentPairData.tracksInfo = [];
-        console.log(musicData);
 
         musicData.forEach((item) => {
-            console.log(item.album.release_date);
             let trackInfo = {
                 album: item.album.name,
                 thumb: item.album.images[2].url,
-                releaseYear: dayjs(item.album.release_date, 'YYYY-MM-DD').format('YYYY'),
+                releaseYear: item.album.release_date ? dayjs(item.album.release_date, 'YYYY-MM-DD').format('YYYY') : '',
                 artists: item.artists.map((item) => {
                     return item.name;
                 }),
@@ -418,46 +410,38 @@ $(function (){
     /* Pair Data */
 
     function savePairData(event) {
-        console.log('Save Game Music Data');
         event.preventDefault();
 
         let pairName = $(event.currentTarget).find('.js-pair-name').val().trim();
 
-        if (currentPairData.gameInfo === undefined
-        && currentPairData.tracksInfo === undefined
-        || pairName === '') {
-            return;
-        }
+        if (Object.entries(currentPairData.gameInfo).length > 0
+        && currentPairData.tracksInfo.length > 0
+        || pairName !== '') {
+            let isExistedPair = savedPairs[pairName] ? true : false;
 
-        let isExistedPair = savedPairs[pairName] ? true : false;
+            savedPairs[pairName] = currentPairData;
 
-        savedPairs[pairName] = currentPairData;
+            localStorage.setItem('savedPairs', JSON.stringify(savedPairs));
 
-        localStorage.setItem('savedPairs', JSON.stringify(savedPairs));
+            materializeElems.modal.modal('close');
 
-        materializeElems.modal.modal('close');
-
-        if (!isExistedPair) {
-            displayPairItem(pairName);
+            if (!isExistedPair) {
+                displayPairItem(pairName);
+            }
         }
     }
 
     function displayPairsList() {
-        console.log('Display Pairs List');
         elements.pairsList.text('');
 
         let pairs = Object.keys(savedPairs);
 
         if (pairs.length > 0) {
-            for (let item of pairs) {
-                displayPairItem(item);
-            }
+            pairs.forEach(displayPairItem);
         }
     }
 
     function displayPairItem(pairName) {
-        console.log('Display Pair Item');
-        // console.log(pairName);
         let pairElem = $(`
             <li class="pair-item">${pairName}</li>
         `);
@@ -472,26 +456,24 @@ $(function (){
     }
 
     function displayPairData(event) {
-        console.log('Display Pair Data');
+        materializeElems.sidenav.sidenav('close');
+
         let eventElem = $(event.currentTarget);
         let pairName = eventElem.data('pair-name');
 
-        // console.log(savedPairs[pairName]);
         displayGameElem(savedPairs[pairName].gameInfo);
 
         elements.tracksList.text('');
-        currentPairData.tracksInfo = [];
 
         savedPairs[pairName].tracksInfo.forEach(displayTrackItem);
         elements.musicShuffle.removeAttr('disabled');
+
         showResultSection();
     }
 
     /* END Pair Data */
 
     function init() {
-        console.log('%c Init', 'color: #0455BF;');
-
         materializeElems.sidenav.sidenav({
             edge: 'right',
         });
@@ -504,14 +486,8 @@ $(function (){
         elements.gameShuffle.on('click', showSearchSection);
         elements.saveForm.on('submit', savePairData);
 
-        
-        let homeButton = $(".homeButton");
-
-        homeButton.on("click", showSearchSection);
-
-        console.log(homeButton)
+        elements.homeLink.on("click", showSearchSection);
     }
-    
 
     init();
 });
