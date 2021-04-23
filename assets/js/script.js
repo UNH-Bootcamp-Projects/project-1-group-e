@@ -21,6 +21,7 @@ $(function (){
         saveForm: $('.js-save-pair-form'),
         tracksList: $('.js-tracks-list'),
         pairsList: $('.js-pairs-list'),
+        homeLink: $('.js-home-link'),
     }
 
     let gameApiData = {
@@ -485,14 +486,8 @@ $(function (){
         elements.gameShuffle.on('click', showSearchSection);
         elements.saveForm.on('submit', savePairData);
 
-        
-        let homeButton = $(".homeButton");
-
-        homeButton.on("click", showSearchSection);
-
-        console.log(homeButton)
+        elements.homeLink.on("click", showSearchSection);
     }
-    
 
     init();
 });
