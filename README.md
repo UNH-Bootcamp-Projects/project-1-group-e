@@ -24,7 +24,7 @@ Given a Game Pulse project with form inputs
              Rating.
              Release date.
 
-    3.2 Playlist card:
+    3.2 **Playlist card**:
             Spotify playlist Genres.
 
     3.3 Shuffle button for playlist.
@@ -36,20 +36,20 @@ Given a Game Pulse project with form inputs
  - CSS
  - JavaScript
  - jQuery
- - Games:[GiantBomb API](https://www.giantbomb.com/api)
- - Music:[Spotify]( https://developer.spotify.com/documentation/web-api/)
+ - Games: [GiantBomb API](https://www.giantbomb.com/api)
+ - Music: [Spotify]( https://developer.spotify.com/documentation/web-api/)
 
 ## Mockup
 
 The following image shows the web application's appearance and funcationality:
 
-![Game Pulse Search Page](./assets/images/searchpage.PNG)
-![Game Pulse Pick A Game Page](./assets/images/pickagame.PNG)
-![Game Pulse Results Page](./assets/images/resultspage.PNG)
+![Game Pulse Search Page](./res/images/searchpage.PNG)
+![Game Pulse Pick A Game Page](./res/images/pickagamepage.PNG)
+![Game Pulse Results Page](./res/images/resultspage.PNG)
 
 
 ## URL of the website 
-  
+  https://unh-bootcamp-projects.github.io/project-1-group-e/
 
 ## Github link 
 https://github.com/UNH-Bootcamp-Projects/project-1-group-e.git
