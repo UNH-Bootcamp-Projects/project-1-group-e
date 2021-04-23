@@ -326,6 +326,17 @@ nav a.sidenav-trigger i {
     padding-left: 50px;
 }
 
+.search-section .noresults-message {
+    color: var(--white);
+    box-shadow: var(--box-shadow);
+    border-radius: 10px;
+    background-color: var(--light-red);
+    font: bold 1.2rem/1 var(--dosis-font);
+    text-shadow: var(--white-text-shadow);
+    padding: .5rem .8rem;
+    margin: .5rem 0;
+}
+
 @media screen and (max-width: 767px) {
     .search-section .site-title {
         font-size: 3.5rem;
