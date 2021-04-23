@@ -45,7 +45,7 @@ The following image shows the web application's appearance and funcationality:
 
 ![Game Pulse Search Page](./res/images/searchpage.PNG)
 ![Game Pulse Pick A Game Page](./res/images/pickagamepage.PNG)
-![Game Pulse Results Page](./res/images/resultspage.PNG)
+![Game Pulse Results Page](./res/images/resultspage.png)
 
 
 ## URL of the website 
