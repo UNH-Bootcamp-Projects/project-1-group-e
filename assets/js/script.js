@@ -37,8 +37,9 @@ $(function (){
     let savedPairs = JSON.parse(localStorage.getItem('savedPairs')) || {};
 
     let currentPairData = {
-        gameInfo: {},
+        gameInfo: undefined,
         tracksInfo: [],
+        musicGenre: undefined,
     };
 
     function getRandomInt(max) {
@@ -291,6 +292,7 @@ $(function (){
         let data = await result.json();
 
         elements.genreName.text(genres[genreIndex]);
+        currentPairData.musicGenre = genres[genreIndex];
 
         return data;
     }
@@ -414,12 +416,12 @@ $(function (){
 
         let pairName = $(event.currentTarget).find('.js-pair-name').val().trim();
 
-        if (Object.entries(currentPairData.gameInfo).length > 0
+        if (currentPairData.gameInfo !== undefined
         && currentPairData.tracksInfo.length > 0
-        || pairName !== '') {
+        && pairName !== '') {
             let isExistedPair = savedPairs[pairName] ? true : false;
 
-            savedPairs[pairName] = currentPairData;
+            savedPairs[pairName] = Object.assign({}, currentPairData);
 
             localStorage.setItem('savedPairs', JSON.stringify(savedPairs));
 
@@ -456,18 +458,19 @@ $(function (){
     }
 
     function displayPairData(event) {
-        materializeElems.sidenav.sidenav('close');
-
         let eventElem = $(event.currentTarget);
         let pairName = eventElem.data('pair-name');
+
+        elements.genreName.text(savedPairs[pairName].musicGenre);
 
         displayGameElem(savedPairs[pairName].gameInfo);
 
         elements.tracksList.text('');
-
+        currentPairData.tracksInfo = [];
         savedPairs[pairName].tracksInfo.forEach(displayTrackItem);
-        elements.musicShuffle.removeAttr('disabled');
 
+        elements.musicShuffle.removeAttr('disabled');
+        materializeElems.sidenav.sidenav('close');
         showResultSection();
     }
 
