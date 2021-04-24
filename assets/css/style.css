@@ -47,7 +47,7 @@ body {
     background-repeat: repeat-x;
     background-attachment: fixed;
     min-height: 100%;
-    animation: animatedBackground 60s linear infinite;
+    animation: animatedBackground 120s linear infinite;
 }
 
 /* END Basic Styles */
