@@ -250,7 +250,8 @@ nav a.sidenav-trigger i {
 .pairs-list .pair-item {
     color: var(--white);
     background-color: var(--black);
-    padding: 0 .5rem;
+    line-height: 1.4;
+    padding: 1rem .5rem;
     margin: 0 0 2px 0;
     cursor: pointer;
     transition: background-color .3s;
